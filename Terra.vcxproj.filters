@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\graphics\Game.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\systems\RenderSystem.cpp">
+      <Filter>Source\Graphics\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Scene.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\graphics\Game.hpp">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\ResourceHolder.hpp">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\ResourceIdentifiers.hpp">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\systems\RenderSystem.hpp">
+      <Filter>Source\Graphics\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\components\Render.hpp">
+      <Filter>Source\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Scene.hpp">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Helper.hpp">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Utility.hpp">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{83ec061b-20aa-4233-9732-02c9891229b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics">
+      <UniqueIdentifier>{2aa4f053-b81f-4eb2-b08e-f998fbf7ef8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Components">
+      <UniqueIdentifier>{3a12546b-8a86-417a-bbf8-f05b26967145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Systems">
+      <UniqueIdentifier>{15e288cd-e11d-479c-8211-2ef47c5e98dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility">
+      <UniqueIdentifier>{4d9c9d57-e8f9-44ff-829d-6585d8c78986}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
