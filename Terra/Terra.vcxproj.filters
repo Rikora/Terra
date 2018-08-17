@@ -11,6 +11,9 @@
     <ClCompile Include="src\graphics\Scene.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\systems\AnimationSystem.cpp">
+      <Filter>Source\Graphics\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Game.hpp">
@@ -36,6 +39,12 @@
     </ClInclude>
     <ClInclude Include="src\utils\Utility.hpp">
       <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\components\Animation.hpp">
+      <Filter>Source\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\systems\AnimationSystem.hpp">
+      <Filter>Source\Graphics\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

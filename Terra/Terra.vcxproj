@@ -141,13 +141,16 @@
   <ItemGroup>
     <ClCompile Include="src\graphics\Game.cpp" />
     <ClCompile Include="src\graphics\Scene.cpp" />
+    <ClCompile Include="src\graphics\systems\AnimationSystem.cpp" />
     <ClCompile Include="src\graphics\systems\RenderSystem.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\components\Animation.hpp" />
     <ClInclude Include="src\graphics\components\Render.hpp" />
     <ClInclude Include="src\graphics\Game.hpp" />
     <ClInclude Include="src\graphics\Scene.hpp" />
+    <ClInclude Include="src\graphics\systems\AnimationSystem.hpp" />
     <ClInclude Include="src\graphics\systems\RenderSystem.hpp" />
     <ClInclude Include="src\utils\Helper.hpp" />
     <ClInclude Include="src\utils\ResourceHolder.hpp" />

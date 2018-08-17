@@ -3,14 +3,15 @@
 ////////////////////////////////////////////////////////////
 #include <graphics/Scene.hpp>
 #include <graphics/systems/RenderSystem.hpp>
+#include <graphics/systems/AnimationSystem.hpp>
 
 namespace px
 {
-	Scene::Scene(sf::RenderTarget & target, const TextureHolder & textures) : m_entities(m_events), m_systems(m_entities, m_events),
+	Scene::Scene(sf::RenderTarget & target, const TextureHolder & textures, sf::Clock & clock) : m_entities(m_events), m_systems(m_entities, m_events),
 																			  m_textures(textures)
 	{
 		m_layers = { 0, 1 };
-		initSystems(target);
+		initSystems(target, clock);
 	}
 
 	void Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
@@ -29,9 +30,14 @@ namespace px
 			entity.destroy();
 	}
 
-	void Scene::updateSystems(double dt)
+	void Scene::updateRenderSystem(TimeDelta dt)
 	{
 		m_systems.update<RenderSystem>(dt);
+	}
+
+	void Scene::updateAnimationSystem(TimeDelta dt)
+	{
+		m_systems.update<AnimationSystem>(dt);
 	}
 
 	EntityManager & Scene::getEntities()
@@ -51,9 +57,10 @@ namespace px
 		return found;
 	}
 
-	void Scene::initSystems(sf::RenderTarget & target)
+	void Scene::initSystems(sf::RenderTarget & target, sf::Clock & clock)
 	{
 		m_systems.add<RenderSystem>(target, m_layers);
+		m_systems.add<AnimationSystem>(clock);
 		m_systems.configure();
 	}
 }

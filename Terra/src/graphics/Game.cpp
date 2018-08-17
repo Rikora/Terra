@@ -6,7 +6,6 @@
 #include <utils/Helper.hpp>
 #include <utils/Utility.hpp>
 #include <SFML/Window/Event.hpp>
-#include <SFML/System/Time.hpp>
 
 namespace px
 {
@@ -15,7 +14,7 @@ namespace px
 	bool stopped = false;
 
 	Game::Game() : m_window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Terra", sf::Style::Close,
-							sf::ContextSettings(0U, 0U, 8U)), m_animator(m_animations)
+							sf::ContextSettings(0U, 0U, 8U))
 	{
 		m_window.setVerticalSyncEnabled(true);
 		loadResources();
@@ -35,18 +34,23 @@ namespace px
 		m_images.LoadResource(Textures::Icon, "src/res/icon/dragon.png");
 		m_textures.LoadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
 		m_textures.LoadResource(Textures::Background, "src/res/sprites/wizardtower.png");
-
-		// Animations
-		m_animations.addAnimation(Animations::Player_Monk_Walk_Right, utils::addFrames(m_walkRight, 11, 9), sf::seconds(1.f));
-		m_animations.addAnimation(Animations::Player_Monk_Attack_Right, utils::addFrames(m_attackRight, 15, 6), sf::seconds(0.8f));
-		m_animator.play() << Animations::Player_Monk_Walk_Right << thor::Playback::loop(Animations::Player_Monk_Walk_Right);
 	}
 
 	void Game::initScene()
 	{
-		m_scene = std::make_unique<Scene>(m_window, m_textures);
+		m_scene = std::make_unique<Scene>(m_window, m_textures, m_animationsClock);
 		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
 		m_scene->createEntity("Monk", Textures::Monk, PLAYER_BASE_POSITION, 1);
+		Entity monk = m_scene->getEntity("Monk");
+		monk.assign<Animation>();
+
+		// Add animations to entity
+		monk.component<Animation>()->frameAnimations.resize(2);
+		monk.component<Animation>()->animations.addAnimation(Animations::Player_Monk_Walk_Right, 
+									utils::addFrames(monk.component<Animation>()->frameAnimations[0], 11, 9), sf::seconds(1.f));
+		monk.component<Animation>()->animations.addAnimation(Animations::Player_Monk_Attack_Right,
+									utils::addFrames(monk.component<Animation>()->frameAnimations[1], 15, 6), sf::seconds(0.8f));
+		monk.component<Animation>()->animator.play() << Animations::Player_Monk_Walk_Right << thor::Playback::loop(Animations::Player_Monk_Walk_Right);
 	}
 
 	void Game::pollEvents()
@@ -69,20 +73,19 @@ namespace px
 		{
 			if (!stopped)
 			{
-				m_animator.stop();
-				m_animator.play() << Animations::Player_Monk_Attack_Right << thor::Playback::loop(Animations::Player_Monk_Attack_Right);
+				monk.component<Animation>()->animator.stop();
+				monk.component<Animation>()->animator.play() << Animations::Player_Monk_Attack_Right << thor::Playback::loop(Animations::Player_Monk_Attack_Right);
 				stopped = true;
 			}
 		}
 
-		m_animator.update(dt);
-		m_animator.animate(*monk.component<Render>()->sprite);
+		m_scene->updateAnimationSystem(timestep);
 	}
 
 	void Game::render()
 	{
 		m_window.clear();
-		m_scene->updateSystems(timestep);
+		m_scene->updateRenderSystem(timestep);
 		m_window.display();
 	}
 

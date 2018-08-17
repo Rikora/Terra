@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////
 #include <entityx/entityx.h>
 #include <graphics/components/Render.hpp>
+#include <graphics/components/Animation.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
 
@@ -20,20 +21,21 @@ namespace px
 	class Scene : public EntityX
 	{
 	public:
-		Scene(sf::RenderTarget & target, const TextureHolder & textures);
+		Scene(sf::RenderTarget & target, const TextureHolder & textures, sf::Clock & clock);
 		~Scene() = default;
 
 	public:
 		void createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
 		void destroyEntities();
-		void updateSystems(double dt);
+		void updateRenderSystem(TimeDelta dt);
+		void updateAnimationSystem(TimeDelta dt);
 
 	public:
 		EntityManager & getEntities();
 		Entity getEntity(const std::string & name);
 
 	private:
-		void initSystems(sf::RenderTarget & target);
+		void initSystems(sf::RenderTarget & target, sf::Clock & clock);
 
 	private:
 		EntityManager m_entities;

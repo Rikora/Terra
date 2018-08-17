@@ -9,11 +9,6 @@
 #include <Thor/Animations/FrameAnimation.hpp>
 #include <memory>
 
-namespace sf
-{
-	class Time;
-}
-
 namespace px
 {
 	class Scene;
@@ -36,12 +31,8 @@ namespace px
 		sf::RenderWindow m_window;
 		TextureHolder m_textures;
 		ImageHolder m_images;
-		AnimationsHolder m_animations;
-		Animator m_animator;
 		//FontHolder m_fonts;
-		thor::FrameAnimation m_walkRight;
-		thor::FrameAnimation m_attackRight;
-		Animations::ID m_currentAnimation;
+		sf::Clock m_animationsClock;
 
 	private:
 		std::unique_ptr<Scene> m_scene;
