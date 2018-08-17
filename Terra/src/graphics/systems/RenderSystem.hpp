@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////
 #include <entityx/entityx.h>
 #include <SFML/Graphics/Shape.hpp>
+#include <utils/Helper.hpp>
 
 using namespace entityx;
 
@@ -19,7 +20,7 @@ namespace px
 	class RenderSystem : public System<RenderSystem>
 	{
 	public:
-		explicit RenderSystem(sf::RenderTarget & target);
+		explicit RenderSystem(sf::RenderTarget & target, std::vector<uint> & layers);
 
 	public:
 		virtual void update(EntityManager &es, EventManager &events, TimeDelta dt) override;
@@ -29,5 +30,6 @@ namespace px
 
 	private:
 		sf::RenderTarget & m_target;
+		std::vector<uint> & m_layers;
 	};
 }

@@ -10,16 +10,16 @@ namespace px
 	Scene::Scene(sf::RenderTarget & target, const TextureHolder & textures) : m_entities(m_events), m_systems(m_entities, m_events),
 																			  m_textures(textures)
 	{
+		m_layers = { 0, 1 };
 		initSystems(target);
 	}
 
-	void Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position)
+	void Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
 	{
-		//TODO: update this for spritesheets?
 		auto entity = m_entities.create();
 		auto sprite = std::make_unique<sf::Sprite>(m_textures.GetResource(texID));
 		sprite->setPosition(position);
-		entity.assign<Render>(std::move(sprite), name);
+		entity.assign<Render>(std::move(sprite), name, layer);
 	}
 
 	void Scene::destroyEntities()
@@ -54,7 +54,7 @@ namespace px
 
 	void Scene::initSystems(sf::RenderTarget & target)
 	{
-		m_systems.add<RenderSystem>(target);
+		m_systems.add<RenderSystem>(target, m_layers);
 		m_systems.configure();
 	}
 }

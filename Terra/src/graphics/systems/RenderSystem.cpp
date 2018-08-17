@@ -8,7 +8,7 @@
 
 namespace px
 {
-	RenderSystem::RenderSystem(sf::RenderTarget & target) : m_target(target)
+	RenderSystem::RenderSystem(sf::RenderTarget & target, std::vector<uint> & layers) : m_target(target), m_layers(layers)
 	{
 	}
 
@@ -16,10 +16,16 @@ namespace px
 	{
 		ComponentHandle<Render> render;
 
-		for (auto entity : es.entities_with_components(render))
+		for (auto layer : m_layers)
 		{
-			m_target.draw(*render->sprite.get());
-			//m_target.draw(getBoundingRect(render->sprite->getGlobalBounds())); // Draw bounding rect of the shape
+			for (auto entity : es.entities_with_components(render))
+			{
+				if (render->layer == layer)
+				{
+					m_target.draw(*render->sprite.get());
+					//m_target.draw(getBoundingRect(render->sprite->getGlobalBounds())); // Draw bounding rect of the shape
+				}
+			}
 		}
 	}
 

@@ -11,7 +11,8 @@ namespace Textures
 	enum ID
 	{
 		Icon,
-		Monk
+		Monk,
+		Sprite
 	};
 }
 

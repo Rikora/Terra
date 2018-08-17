@@ -24,7 +24,7 @@ namespace px
 		~Scene() = default;
 
 	public:
-		void createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position);
+		void createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
 		void destroyEntities();
 		void updateSystems(double dt);
 
@@ -40,5 +40,6 @@ namespace px
 		EventManager m_events;
 		SystemManager m_systems;
 		const TextureHolder & m_textures;
+		std::vector<uint> m_layers;
 	};
 }
