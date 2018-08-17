@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////
 #include <graphics/Game.hpp>
 #include <graphics/Scene.hpp>
+#include <graphics/PlayerMinion.hpp>
 #include <utils/Helper.hpp>
 #include <utils/Utility.hpp>
 #include <SFML/Window/Event.hpp>
@@ -39,17 +40,9 @@ namespace px
 	void Game::initScene()
 	{
 		m_scene = std::make_unique<Scene>(m_window, m_textures, m_animationsClock);
-		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
-		Entity monk = m_scene->createEntity("Monk", Textures::Monk, PLAYER_BASE_POSITION, 1);
-		monk.assign<Animation>();
+		m_minion = std::make_unique<PlayerMinion>(*m_scene.get());
 
-		// Add animations to entity
-		monk.component<Animation>()->frameAnimations.resize(2);
-		monk.component<Animation>()->animations.addAnimation(Animations::Player_Monk_Walk_Right, 
-									utils::addFrames(monk.component<Animation>()->frameAnimations[0], 11, 9), sf::seconds(1.f));
-		monk.component<Animation>()->animations.addAnimation(Animations::Player_Monk_Attack_Right,
-									utils::addFrames(monk.component<Animation>()->frameAnimations[1], 15, 6), sf::seconds(0.8f));
-		monk.component<Animation>()->animator.play() << Animations::Player_Monk_Walk_Right << thor::Playback::loop(Animations::Player_Monk_Walk_Right);
+		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
 	}
 
 	void Game::pollEvents()
@@ -64,20 +57,7 @@ namespace px
 
 	void Game::update(double dt)
 	{
-		Entity monk = m_scene->getEntity("Monk");
-
-		if (monk.component<Render>()->sprite->getPosition().x < stopPosition)
-			monk.component<Render>()->sprite->move(sf::Vector2f(60.f, 0.f) * (1.f / 60.f));
-		else
-		{
-			if (!stopped)
-			{
-				monk.component<Animation>()->animator.stop();
-				monk.component<Animation>()->animator.play() << Animations::Player_Monk_Attack_Right << thor::Playback::loop(Animations::Player_Monk_Attack_Right);
-				stopped = true;
-			}
-		}
-
+		m_minion->attack();
 		m_scene->updateAnimationSystem(timestep);
 	}
 

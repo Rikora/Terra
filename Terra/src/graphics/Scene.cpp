@@ -7,8 +7,8 @@
 
 namespace px
 {
-	Scene::Scene(sf::RenderTarget & target, const TextureHolder & textures, sf::Clock & clock) : m_entities(m_events), m_systems(m_entities, m_events),
-																			  m_textures(textures)
+	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, sf::Clock & clock) : m_entities(m_events), m_systems(m_entities, m_events),
+																						   m_textures(textures)
 	{
 		m_layers = { 0, 1 };
 		initSystems(target, clock);

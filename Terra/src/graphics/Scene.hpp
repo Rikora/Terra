@@ -21,7 +21,7 @@ namespace px
 	class Scene : public EntityX
 	{
 	public:
-		explicit Scene(sf::RenderTarget & target, const TextureHolder & textures, sf::Clock & clock);
+		explicit Scene(sf::RenderTarget & target, TextureHolder & textures, sf::Clock & clock);
 		~Scene() = default;
 
 	public:
@@ -41,7 +41,7 @@ namespace px
 		EntityManager m_entities;
 		EventManager m_events;
 		SystemManager m_systems;
-		const TextureHolder & m_textures;
+		TextureHolder & m_textures;
 		std::vector<uint> m_layers;
 	};
 }

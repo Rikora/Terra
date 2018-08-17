@@ -12,6 +12,7 @@
 namespace px
 {
 	class Scene;
+	class PlayerMinion;
 
 	class Game
 	{
@@ -36,5 +37,6 @@ namespace px
 
 	private:
 		std::unique_ptr<Scene> m_scene;
+		std::unique_ptr<PlayerMinion> m_minion;
 	};
 }

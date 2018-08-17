@@ -14,6 +14,9 @@
     <ClCompile Include="src\graphics\systems\AnimationSystem.cpp">
       <Filter>Source\Graphics\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\PlayerMinion.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Game.hpp">
@@ -45,6 +48,9 @@
     </ClInclude>
     <ClInclude Include="src\graphics\systems\AnimationSystem.hpp">
       <Filter>Source\Graphics\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\PlayerMinion.hpp">
+      <Filter>Source\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
