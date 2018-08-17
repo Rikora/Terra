@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 //
-// Aurora C++ Library
-// Copyright (c) 2012-2016 Jan Haller
+// Thor C++ Library
+// Copyright (c) 2011-2017 Jan Haller
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -23,14 +23,31 @@
 //
 /////////////////////////////////////////////////////////////////////////////////
 
-/// @file
-/// @brief Complete Dispatch module
+namespace thor
+{
 
-#ifndef AURORA_MODULE_DISPATCH_HPP
-#define AURORA_MODULE_DISPATCH_HPP
+template <class Animated, typename Id>
+AnimationMap<Animated, Id>::AnimationMap()
+: mAnimationMap()
+{
+}
 
-#include <Aurora/Dispatch/DispatchTraits.hpp>
-#include <Aurora/Dispatch/DoubleDispatcher.hpp>
-#include <Aurora/Dispatch/SingleDispatcher.hpp>
+template <class Animated, typename Id>
+void AnimationMap<Animated, Id>::addAnimation(Id id, std::function<void(Animated&, float)> animation, sf::Time duration)
+{
+	assert(mAnimationMap.find(id) == mAnimationMap.end());
+	assert(duration > sf::Time::Zero);
 
-#endif // AURORA_MODULE_DISPATCH_HPP
+	mAnimationMap.insert(std::make_pair(std::move(id), TimedAnimation(std::move(animation), duration)));
+}
+
+template <class Animated, typename Id>
+const typename AnimationMap<Animated, Id>::TimedAnimation& AnimationMap<Animated, Id>::getAnimation(const Id& id) const
+{
+	auto itr = mAnimationMap.find(id);
+	assert(itr != mAnimationMap.end());
+
+	return itr->second;
+}
+
+} // namespace thor

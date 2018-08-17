@@ -11,9 +11,11 @@
 namespace px
 {
 	double timestep = 1.0 / 60.0;
+	float stopPosition = 100.f;
+	bool stopped = false;
 
 	Game::Game() : m_window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Terra", sf::Style::Close,
-							sf::ContextSettings(0U, 0U, 8U))
+							sf::ContextSettings(0U, 0U, 8U)), m_animator(m_animations)
 	{
 		m_window.setVerticalSyncEnabled(true);
 		loadResources();
@@ -35,7 +37,9 @@ namespace px
 		m_textures.LoadResource(Textures::Background, "src/res/sprites/wizardtower.png");
 
 		// Animations
-		m_animator.addAnimation(Animations::Player_Monk_Walk_Right, utils::addFrames(m_walkRight, 11, 9), sf::seconds(1.f));
+		m_animations.addAnimation(Animations::Player_Monk_Walk_Right, utils::addFrames(m_walkRight, 11, 9), sf::seconds(1.f));
+		m_animations.addAnimation(Animations::Player_Monk_Attack_Right, utils::addFrames(m_attackRight, 15, 6), sf::seconds(0.8f));
+		m_animator.play() << Animations::Player_Monk_Walk_Right << thor::Playback::loop(Animations::Player_Monk_Walk_Right);
 	}
 
 	void Game::initScene()
@@ -57,13 +61,22 @@ namespace px
 
 	void Game::update(sf::Time dt)
 	{
-		// Update the sprite animation
-		if (!m_animator.isPlayingAnimation())
-			m_animator.playAnimation(Animations::Player_Monk_Walk_Right);
+		Entity monk = m_scene->getEntity("Monk");
+
+		if (monk.component<Render>()->sprite->getPosition().x < stopPosition)
+			monk.component<Render>()->sprite->move(sf::Vector2f(60.f, 0.f) * (1.f / 60.f));
+		else
+		{
+			if (!stopped)
+			{
+				m_animator.stop();
+				m_animator.play() << Animations::Player_Monk_Attack_Right << thor::Playback::loop(Animations::Player_Monk_Attack_Right);
+				stopped = true;
+			}
+		}
 
 		m_animator.update(dt);
-		m_animator.animate(*m_scene->getEntity("Monk").component<Render>()->sprite);
-		//m_scene->getEntity("Monk").component<Render>()->sprite->move(sf::Vector2f(60.f, 0.f) * (1.f / 60.f));
+		m_animator.animate(*monk.component<Render>()->sprite);
 	}
 
 	void Game::render()

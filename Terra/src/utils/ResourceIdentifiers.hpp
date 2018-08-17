@@ -29,7 +29,8 @@ namespace Animations
 {
 	enum ID
 	{
-		Player_Monk_Walk_Right
+		Player_Monk_Walk_Right,
+		Player_Monk_Attack_Right
 	};
 }
 
@@ -45,4 +46,5 @@ namespace px
 using TextureHolder = px::utils::ResourceHolder<sf::Texture, Textures::ID>;
 using ImageHolder = px::utils::ResourceHolder<sf::Image, Textures::ID>;
 using FontHolder = px::utils::ResourceHolder<sf::Font, Fonts::ID>;
-using AnimationsHolder = thor::Animator<sf::Sprite, Animations::ID>;
+using AnimationsHolder = thor::AnimationMap<sf::Sprite, Animations::ID>;
+using Animator = thor::Animator<sf::Sprite, Animations::ID>;

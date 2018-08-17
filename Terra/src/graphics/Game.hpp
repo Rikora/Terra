@@ -36,9 +36,12 @@ namespace px
 		sf::RenderWindow m_window;
 		TextureHolder m_textures;
 		ImageHolder m_images;
-		AnimationsHolder m_animator;
+		AnimationsHolder m_animations;
+		Animator m_animator;
 		//FontHolder m_fonts;
 		thor::FrameAnimation m_walkRight;
+		thor::FrameAnimation m_attackRight;
+		Animations::ID m_currentAnimation;
 
 	private:
 		std::unique_ptr<Scene> m_scene;

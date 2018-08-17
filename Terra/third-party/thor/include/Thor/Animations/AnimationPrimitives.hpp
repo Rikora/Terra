@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 //
-// Aurora C++ Library
-// Copyright (c) 2012-2016 Jan Haller
+// Thor C++ Library
+// Copyright (c) 2011-2017 Jan Haller
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -24,13 +24,40 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 /// @file
-/// @brief Complete Dispatch module
+/// @brief Functions to create and combine animations
 
-#ifndef AURORA_MODULE_DISPATCH_HPP
-#define AURORA_MODULE_DISPATCH_HPP
+#ifndef THOR_ANIMATIONPRIMITIVES_HPP
+#define THOR_ANIMATIONPRIMITIVES_HPP
 
-#include <Aurora/Dispatch/DispatchTraits.hpp>
-#include <Aurora/Dispatch/DoubleDispatcher.hpp>
-#include <Aurora/Dispatch/SingleDispatcher.hpp>
+#include <Thor/Config.hpp>
+#include <Thor/Animations/AnimationMap.hpp>
 
-#endif // AURORA_MODULE_DISPATCH_HPP
+#include <SFML/System/Time.hpp>
+
+#include <map>
+#include <functional>
+#include <cassert>
+#include <cmath>
+
+
+namespace thor
+{
+namespace detail
+{
+
+} // namespace
+
+
+/// @addtogroup Animations
+/// @{
+
+
+
+
+
+/// @}
+
+} // namespace thor
+
+#include <Thor/Animations/Detail/AnimationMap.inl>
+#endif // THOR_ANIMATIONMAP_HPP
