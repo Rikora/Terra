@@ -14,12 +14,13 @@ namespace px
 		initSystems(target, clock);
 	}
 
-	void Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
+	Entity Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
 	{
 		auto entity = m_entities.create();
 		auto sprite = std::make_unique<sf::Sprite>(m_textures.GetResource(texID));
 		sprite->setPosition(position);
 		entity.assign<Render>(std::move(sprite), name, layer);
+		return entity;
 	}
 
 	void Scene::destroyEntities()

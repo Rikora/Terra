@@ -40,8 +40,7 @@ namespace px
 	{
 		m_scene = std::make_unique<Scene>(m_window, m_textures, m_animationsClock);
 		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
-		m_scene->createEntity("Monk", Textures::Monk, PLAYER_BASE_POSITION, 1);
-		Entity monk = m_scene->getEntity("Monk");
+		Entity monk = m_scene->createEntity("Monk", Textures::Monk, PLAYER_BASE_POSITION, 1);
 		monk.assign<Animation>();
 
 		// Add animations to entity
@@ -63,7 +62,7 @@ namespace px
 		}
 	}
 
-	void Game::update(sf::Time dt)
+	void Game::update(double dt)
 	{
 		Entity monk = m_scene->getEntity("Monk");
 
@@ -91,12 +90,10 @@ namespace px
 
 	void Game::run()
 	{
-		sf::Clock clock;
-
 		while (m_window.isOpen())
 		{
 			pollEvents();
-			update(clock.restart());
+			update(timestep);
 			render();
 		}
 	}

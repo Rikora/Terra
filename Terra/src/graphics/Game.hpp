@@ -16,14 +16,14 @@ namespace px
 	class Game
 	{
 	public:
-		Game();
+		explicit Game();
 		~Game();
 		void run();
 
 	private:
 		void initScene();
 		void pollEvents();
-		void update(sf::Time dt);
+		void update(double dt);
 		void render();
 		void loadResources();
 

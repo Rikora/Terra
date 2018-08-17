@@ -21,11 +21,11 @@ namespace px
 	class Scene : public EntityX
 	{
 	public:
-		Scene(sf::RenderTarget & target, const TextureHolder & textures, sf::Clock & clock);
+		explicit Scene(sf::RenderTarget & target, const TextureHolder & textures, sf::Clock & clock);
 		~Scene() = default;
 
 	public:
-		void createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
+		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
 		void destroyEntities();
 		void updateRenderSystem(TimeDelta dt);
 		void updateAnimationSystem(TimeDelta dt);
