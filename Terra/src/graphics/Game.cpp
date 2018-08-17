@@ -32,7 +32,7 @@ namespace px
 		// Textures
 		m_images.LoadResource(Textures::Icon, "src/res/icon/dragon.png");
 		m_textures.LoadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
-		m_textures.LoadResource(Textures::Sprite , "src/res/sprites/mysteryShip.png");
+		m_textures.LoadResource(Textures::Background, "src/res/sprites/wizardtower.png");
 
 		// Animations
 		m_animator.addAnimation(Animations::Player_Monk_Walk_Right, utils::addFrames(m_walkRight, 11, 9), sf::seconds(1.f));
@@ -41,8 +41,8 @@ namespace px
 	void Game::initScene()
 	{
 		m_scene = std::make_unique<Scene>(m_window, m_textures);
-		m_scene->createEntity("Monk", Textures::Monk, sf::Vector2f(10.f, 400.f), 0);
-		m_scene->createEntity("Dragon", Textures::Sprite, sf::Vector2f(10.f, 425.f), 1);
+		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
+		m_scene->createEntity("Monk", Textures::Monk, PLAYER_BASE_POSITION, 1);
 	}
 
 	void Game::pollEvents()

@@ -12,7 +12,8 @@ namespace Textures
 	{
 		Icon,
 		Monk,
-		Sprite
+		Background,
+		PlaceHolder,
 	};
 }
 

@@ -2,7 +2,6 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <graphics/Scene.hpp>
-#include <SFML/Graphics/Sprite.hpp>
 #include <graphics/systems/RenderSystem.hpp>
 
 namespace px
