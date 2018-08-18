@@ -144,17 +144,20 @@
     <ClCompile Include="src\graphics\Scene.cpp" />
     <ClCompile Include="src\graphics\systems\AnimationSystem.cpp" />
     <ClCompile Include="src\graphics\systems\RenderSystem.cpp" />
+    <ClCompile Include="src\graphics\systems\TransformSystem.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\components\Animation.hpp" />
     <ClInclude Include="src\graphics\components\BoundingBox.hpp" />
     <ClInclude Include="src\graphics\components\Render.hpp" />
+    <ClInclude Include="src\graphics\components\Transform.hpp" />
     <ClInclude Include="src\graphics\Game.hpp" />
     <ClInclude Include="src\graphics\PlayerMinion.hpp" />
     <ClInclude Include="src\graphics\Scene.hpp" />
     <ClInclude Include="src\graphics\systems\AnimationSystem.hpp" />
     <ClInclude Include="src\graphics\systems\RenderSystem.hpp" />
+    <ClInclude Include="src\graphics\systems\TransformSystem.hpp" />
     <ClInclude Include="src\utils\Helper.hpp" />
     <ClInclude Include="src\utils\ResourceHolder.hpp" />
     <ClInclude Include="src\utils\ResourceIdentifiers.hpp" />

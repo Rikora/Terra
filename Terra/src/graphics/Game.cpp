@@ -74,7 +74,7 @@ namespace px
 			minion->attack();*/
 
 		m_minion->attack();
-		m_scene->updateAnimationSystem(timestep);
+		m_scene->updateTransformSystems(timestep);
 	}
 
 	void Game::render()

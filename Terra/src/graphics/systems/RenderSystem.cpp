@@ -28,9 +28,7 @@ namespace px
 					if (entity.has_component<BoundingBox>())
 					{
 						auto box = entity.component<BoundingBox>();
-						box->boundingBox.left = render->sprite->getPosition().x;
-						box->boundingBox.top = render->sprite->getPosition().y;
-						m_target.draw(getBoundingRect(box->boundingBox, box->offset)); // Position system will be a better solution?
+						m_target.draw(getBoundingRect(box->boundingBox, box->offset));
 					}	
 				}
 			}

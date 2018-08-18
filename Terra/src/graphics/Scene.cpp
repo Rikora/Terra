@@ -4,6 +4,7 @@
 #include <graphics/Scene.hpp>
 #include <graphics/systems/RenderSystem.hpp>
 #include <graphics/systems/AnimationSystem.hpp>
+#include <graphics/systems/TransformSystem.hpp>
 
 namespace px
 {
@@ -19,6 +20,7 @@ namespace px
 		auto entity = m_entities.create();
 		auto sprite = std::make_unique<sf::Sprite>(m_textures.GetResource(texID));
 		sprite->setPosition(position);
+		entity.assign<Transform>(position);
 		entity.assign<Render>(std::move(sprite), name, layer);
 		return entity;
 	}
@@ -36,8 +38,9 @@ namespace px
 		m_systems.update<RenderSystem>(dt);
 	}
 
-	void Scene::updateAnimationSystem(TimeDelta dt)
+	void Scene::updateTransformSystems(TimeDelta dt)
 	{
+		m_systems.update<TransformSystem>(dt);
 		m_systems.update<AnimationSystem>(dt);
 	}
 
@@ -61,6 +64,7 @@ namespace px
 	void Scene::initSystems(sf::RenderTarget & target)
 	{
 		m_systems.add<RenderSystem>(target, m_layers);
+		m_systems.add<TransformSystem>();
 		m_systems.add<AnimationSystem>();
 		m_systems.configure();
 	}

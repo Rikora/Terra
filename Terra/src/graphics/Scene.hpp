@@ -7,6 +7,7 @@
 #include <graphics/components/Render.hpp>
 #include <graphics/components/Animation.hpp>
 #include <graphics/components/BoundingBox.hpp>
+#include <graphics/components/Transform.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
 
@@ -29,7 +30,7 @@ namespace px
 		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
 		void destroyEntities();
 		void updateRenderSystem(TimeDelta dt);
-		void updateAnimationSystem(TimeDelta dt);
+		void updateTransformSystems(TimeDelta dt);
 
 	public:
 		EntityManager & getEntities();
