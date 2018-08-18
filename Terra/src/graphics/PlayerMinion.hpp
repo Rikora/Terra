@@ -22,6 +22,6 @@ namespace px
 	private:
 		Scene & m_scene;
 		Entity m_minion;
-		bool m_attacking;
+		bool m_isAttacking;
 	};
 }

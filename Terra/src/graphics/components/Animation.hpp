@@ -11,7 +11,7 @@ namespace px
 {
 	struct Animation
 	{
-		explicit Animation() : animator(animations) {}
+		Animation() : animator(animations) {}
 
 		AnimationsHolder animations;
 		Animator animator;

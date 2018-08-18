@@ -17,7 +17,7 @@ namespace px
 	class Game
 	{
 	public:
-		explicit Game();
+		Game();
 		~Game();
 		void run();
 
