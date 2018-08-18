@@ -9,12 +9,13 @@ using namespace entityx;
 
 namespace px
 {
-	class AnimationSystem : public System<AnimationSystem>
+	namespace utils
 	{
-	public:
-		AnimationSystem();
+		struct Collision
+		{
+			explicit Collision(Entity left, Entity right) : left(left), right(right) {}
 
-	public:
-		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override;
-	};
+			Entity left, right;
+		};
+	}
 }

@@ -16,7 +16,7 @@ namespace px
 
 	void PlayerMinion::attack()
 	{
-		if (m_minion.component<Transform>()->position.x < 200.f) // 200.f is a test for now
+		if (m_minion.component<Transform>()->position.x < 200.f) 
 			m_minion.component<Transform>()->position += sf::Vector2f(60.f, 0.f) * (1.f / 60.f);
 		else
 		{

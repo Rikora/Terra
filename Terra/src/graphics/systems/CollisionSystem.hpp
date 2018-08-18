@@ -9,10 +9,10 @@ using namespace entityx;
 
 namespace px
 {
-	class AnimationSystem : public System<AnimationSystem>
+	class CollisionSystem : public System<CollisionSystem>
 	{
 	public:
-		AnimationSystem();
+		CollisionSystem();
 
 	public:
 		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override;

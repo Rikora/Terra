@@ -5,6 +5,8 @@
 #include <graphics/systems/RenderSystem.hpp>
 #include <graphics/systems/AnimationSystem.hpp>
 #include <graphics/systems/TransformSystem.hpp>
+#include <graphics/systems/CollisionSystem.hpp>
+#include <graphics/systems/DebugSystem.hpp>
 
 namespace px
 {
@@ -40,8 +42,10 @@ namespace px
 
 	void Scene::updateTransformSystems(TimeDelta dt)
 	{
+		m_systems.update<DebugSystem>(dt);
 		m_systems.update<TransformSystem>(dt);
 		m_systems.update<AnimationSystem>(dt);
+		m_systems.update<CollisionSystem>(dt);
 	}
 
 	EntityManager & Scene::getEntities()
@@ -66,6 +70,8 @@ namespace px
 		m_systems.add<RenderSystem>(target, m_layers);
 		m_systems.add<TransformSystem>();
 		m_systems.add<AnimationSystem>();
+		m_systems.add<CollisionSystem>();
+		m_systems.add<DebugSystem>();
 		m_systems.configure();
 	}
 }

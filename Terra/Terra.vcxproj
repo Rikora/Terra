@@ -143,6 +143,7 @@
     <ClCompile Include="src\graphics\PlayerMinion.cpp" />
     <ClCompile Include="src\graphics\Scene.cpp" />
     <ClCompile Include="src\graphics\systems\AnimationSystem.cpp" />
+    <ClCompile Include="src\graphics\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\graphics\systems\RenderSystem.cpp" />
     <ClCompile Include="src\graphics\systems\TransformSystem.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -156,8 +157,11 @@
     <ClInclude Include="src\graphics\PlayerMinion.hpp" />
     <ClInclude Include="src\graphics\Scene.hpp" />
     <ClInclude Include="src\graphics\systems\AnimationSystem.hpp" />
+    <ClInclude Include="src\graphics\systems\CollisionSystem.hpp" />
+    <ClInclude Include="src\graphics\systems\DebugSystem.hpp" />
     <ClInclude Include="src\graphics\systems\RenderSystem.hpp" />
     <ClInclude Include="src\graphics\systems\TransformSystem.hpp" />
+    <ClInclude Include="src\utils\Collision.hpp" />
     <ClInclude Include="src\utils\Helper.hpp" />
     <ClInclude Include="src\utils\ResourceHolder.hpp" />
     <ClInclude Include="src\utils\ResourceIdentifiers.hpp" />
