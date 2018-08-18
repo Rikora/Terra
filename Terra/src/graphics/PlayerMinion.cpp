@@ -7,12 +7,10 @@
 
 namespace px
 {
-	// TODO: make this class more user friendly for other type of player/enemy minions -> addAnimation()...
 	PlayerMinion::PlayerMinion(Scene & scene) : m_scene(scene), m_isAttacking(false)
 	{
 		m_minion = m_scene.createEntity("Monk", Textures::Monk, PLAYER_BASE_POSITION, 1);
 		m_minion.assign<Animation>();
-		addAnimations();
 	}
 
 	void PlayerMinion::attack()
@@ -24,21 +22,20 @@ namespace px
 			if (!m_isAttacking)
 			{
 				m_minion.component<Animation>()->animator.stop();
-				m_minion.component<Animation>()->animator.play() << Animations::Player_Monk_Attack_Right << thor::Playback::loop(Animations::Player_Monk_Attack_Right);
+				playAnimation(Animations::Player_Monk_Attack_Right, true);
 				m_isAttacking = true;
 			}
 		}
 	}
 
-	void PlayerMinion::addAnimations()
+	void PlayerMinion::addAnimation(Animations::ID id, int row, int frames, sf::Time duration)
 	{
-		m_minion.component<Animation>()->frameAnimations.resize(2);
-		m_minion.component<Animation>()->animations.addAnimation(Animations::Player_Monk_Walk_Right,
-										 utils::addFrames(m_minion.component<Animation>()->frameAnimations[0], 11, 9), sf::seconds(1.f));
-		m_minion.component<Animation>()->animations.addAnimation(Animations::Player_Monk_Attack_Right,
-										 utils::addFrames(m_minion.component<Animation>()->frameAnimations[1], 15, 6), sf::seconds(0.8f));
+		thor::FrameAnimation frameAnim;
+		m_minion.component<Animation>()->animations.addAnimation(id, utils::addFrames(frameAnim, row, frames), duration);
+	}
 
-		// Play the walking animation from the start
-		m_minion.component<Animation>()->animator.play() << Animations::Player_Monk_Walk_Right << thor::Playback::loop(Animations::Player_Monk_Walk_Right);
+	void PlayerMinion::playAnimation(Animations::ID id, bool repeat)
+	{
+		repeat ? m_minion.component<Animation>()->animator.play() << id << thor::Playback::loop(id) : m_minion.component<Animation>()->animator.play();
 	}
 }

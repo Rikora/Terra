@@ -15,6 +15,5 @@ namespace px
 
 		AnimationsHolder animations;
 		Animator animator;
-		std::vector<thor::FrameAnimation> frameAnimations;
 	};
 }

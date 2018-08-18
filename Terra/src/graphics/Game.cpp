@@ -41,6 +41,9 @@ namespace px
 	{
 		m_scene = std::make_unique<Scene>(m_window, m_textures, m_animationsClock);
 		m_minion = std::make_unique<PlayerMinion>(*m_scene.get());
+		m_minion->addAnimation(Animations::Player_Monk_Walk_Right, 11, 9);
+		m_minion->addAnimation(Animations::Player_Monk_Attack_Right, 15, 6, sf::seconds(0.8f));
+		m_minion->playAnimation(Animations::Player_Monk_Walk_Right, true);
 
 		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
 	}

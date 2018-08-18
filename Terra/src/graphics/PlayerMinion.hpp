@@ -1,8 +1,11 @@
 #pragma once
 #include <entityx/Entity.h>
+#include <utils/ResourceHolder.hpp>
+#include <utils/ResourceIdentifiers.hpp>
 
 using namespace entityx;
 
+// Allow inheritance from Minion class in the future if needed?
 namespace px
 {
 	class Scene;
@@ -14,10 +17,11 @@ namespace px
 		~PlayerMinion() = default;
 		
 	public:
+		void addAnimation(Animations::ID id, int row, int frames, sf::Time duration = sf::seconds(1.f));
+		void playAnimation(Animations::ID id, bool repeat = false);
 		void attack();
 
 	private:
-		void addAnimations();
 
 	private:
 		Scene & m_scene;
