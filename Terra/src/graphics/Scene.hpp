@@ -6,6 +6,7 @@
 #include <entityx/entityx.h>
 #include <graphics/components/Render.hpp>
 #include <graphics/components/Animation.hpp>
+#include <graphics/components/BoundingBox.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
 

@@ -26,7 +26,7 @@ namespace px
 		virtual void update(EntityManager &es, EventManager &events, TimeDelta dt) override;
 
 	private:
-		sf::RectangleShape getBoundingRect(const sf::FloatRect & rect);
+		sf::RectangleShape getBoundingRect(const sf::FloatRect & rect, const sf::Vector2f & offset);
 
 	private:
 		sf::RenderTarget & m_target;

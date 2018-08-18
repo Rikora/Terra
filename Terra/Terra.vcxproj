@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\components\Animation.hpp" />
+    <ClInclude Include="src\graphics\components\BoundingBox.hpp" />
     <ClInclude Include="src\graphics\components\Render.hpp" />
     <ClInclude Include="src\graphics\Game.hpp" />
     <ClInclude Include="src\graphics\PlayerMinion.hpp" />
