@@ -15,14 +15,14 @@ namespace px
 
 	void PlayerMinion::attack()
 	{
-		if (m_minion.component<Render>()->sprite->getPosition().x < 100.f) // 100.f is a test for now
+		if (m_minion.component<Render>()->sprite->getPosition().x < 200.f) // 100.f is a test for now
 			m_minion.component<Render>()->sprite->move(sf::Vector2f(60.f, 0.f) * (1.f / 60.f));
 		else
 		{
 			if (!m_isAttacking)
 			{
 				m_minion.component<Animation>()->animator.stop();
-				playAnimation(Animations::Player_Monk_Attack_Right, true);
+				playAnimation(Animations::Player_Monk_Idle_Right, true);
 				m_isAttacking = true;
 			}
 		}

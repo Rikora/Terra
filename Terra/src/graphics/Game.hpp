@@ -33,10 +33,10 @@ namespace px
 		TextureHolder m_textures;
 		ImageHolder m_images;
 		//FontHolder m_fonts;
-		sf::Clock m_animationsClock;
 
 	private:
 		std::unique_ptr<Scene> m_scene;
-		std::unique_ptr<PlayerMinion> m_minion;
+		//std::unique_ptr<PlayerMinion> m_minion;
+		std::vector<std::unique_ptr<PlayerMinion>> m_playerMinions;
 	};
 }

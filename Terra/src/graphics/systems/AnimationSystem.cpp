@@ -1,14 +1,13 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/Clock.hpp>
 #include <graphics/systems/AnimationSystem.hpp>
 #include <graphics/components/Render.hpp>
 #include <graphics/components/Animation.hpp>
 
 namespace px
 {
-	AnimationSystem::AnimationSystem(sf::Clock & animationClock) : m_animationClock(animationClock)
+	AnimationSystem::AnimationSystem()
 	{
 	}
 
@@ -19,7 +18,7 @@ namespace px
 
 		for (auto entity : es.entities_with_components(render, anim))
 		{
-			anim->animator.update(m_animationClock.restart());
+			anim->animator.update(anim->animationClock.restart());
 			anim->animator.animate(*render->sprite);
 		}
 	}

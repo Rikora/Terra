@@ -29,6 +29,7 @@ namespace Animations
 {
 	enum ID
 	{
+		Player_Monk_Idle_Right,
 		Player_Monk_Walk_Right,
 		Player_Monk_Attack_Right
 	};

@@ -7,11 +7,11 @@
 
 namespace px
 {
-	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, sf::Clock & clock) : m_entities(m_events), m_systems(m_entities, m_events),
-																						   m_textures(textures)
+	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures) : m_entities(m_events), m_systems(m_entities, m_events),
+																		m_textures(textures)
 	{
 		m_layers = { 0, 1 };
-		initSystems(target, clock);
+		initSystems(target);
 	}
 
 	Entity Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
@@ -58,10 +58,10 @@ namespace px
 		return found;
 	}
 
-	void Scene::initSystems(sf::RenderTarget & target, sf::Clock & clock)
+	void Scene::initSystems(sf::RenderTarget & target)
 	{
 		m_systems.add<RenderSystem>(target, m_layers);
-		m_systems.add<AnimationSystem>(clock);
+		m_systems.add<AnimationSystem>();
 		m_systems.configure();
 	}
 }

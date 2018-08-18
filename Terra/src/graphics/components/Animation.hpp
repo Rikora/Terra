@@ -15,5 +15,6 @@ namespace px
 
 		AnimationsHolder animations;
 		Animator animator;
+		sf::Clock animationClock;
 	};
 }
