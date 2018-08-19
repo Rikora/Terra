@@ -16,7 +16,7 @@ namespace px
 
 	void PlayerMinion::attack()
 	{
-		if (m_minion.component<Transform>()->position.x < 200.f) 
+		if (m_minion.component<Transform>()->position.x < 300.f) 
 			m_minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (1.f / 60.f);
 		else
 		{
@@ -58,8 +58,9 @@ namespace px
 	{
 		return m_isAttacking;
 	}
+
 	bool PlayerMinion::isFrontAttacking() const
 	{
-		return false;
+		return m_isFrontAttacking;
 	}
 }
