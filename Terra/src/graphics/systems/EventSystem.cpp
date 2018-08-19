@@ -18,31 +18,39 @@ namespace px
 
 	void EventSystem::update(entityx::EntityManager & entities, entityx::EventManager & events, TimeDelta dt)
 	{
-		// This is some ugly shit, will have to come up with a better solution? Lua script?
-		if (m_colliders[0] != NULL && m_colliders[1] != NULL)
+		// This is too deep so the update will halter, need a better solution!
+		for (auto collider_left : m_colliders)
 		{
-			for (auto & minion_left : m_playerMinions)
+			for (auto collider_right : m_colliders)
 			{
-				for (auto & minion_right : m_playerMinions)
+				for (auto & minion_left : m_playerMinions)
 				{
-					if (minion_left == minion_right) continue;
-
-					if (m_colliders[0].component<Transform>()->position.x < m_colliders[1].component<Transform>()->position.x)
+					for (auto & minion_right : m_playerMinions)
 					{
-						if (minion_left->getMinion() == m_colliders[0] && (minion_right->getMinion() == m_colliders[1] && minion_right->isAttacking()))
+						if (minion_left == minion_right) continue;
+
+						if (collider_left.component<Transform>()->position.x < collider_right.component<Transform>()->position.x)
 						{
-							// Halt the minion behind
-							minion_left->setVelocity(0.f);
-							minion_left->playAnimation(Animations::Player_Monk_Idle_Right, true);
+							if ((minion_left->getMinion() == collider_left) && (minion_right->getMinion() == collider_right && minion_right->isAttacking()) ||
+								(minion_left->getMinion() == collider_left) && (minion_right->getMinion() == collider_right && minion_right->isFrontAttacking()))
+							{
+								// Halt the minion behind
+								minion_left->setVelocity(0.f);
+								minion_left->playAnimation(Animations::Player_Monk_Idle_Right, true);
+								minion_left->setFrontAttacking(true);
+							}
 						}
 					}
 				}
 			}
 		}
+
+		m_colliders.clear();
 	}
 
 	void EventSystem::receive(const utils::Collision & collision)
 	{
-		m_colliders = { collision.left, collision.right };
+		m_colliders.push_back(collision.left);
+		m_colliders.push_back(collision.right);
 	}
 }

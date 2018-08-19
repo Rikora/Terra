@@ -7,7 +7,7 @@
 
 namespace px
 {
-	PlayerMinion::PlayerMinion(Scene & scene) : m_scene(scene), m_isAttacking(false), m_velocity(60.f)
+	PlayerMinion::PlayerMinion(Scene & scene) : m_scene(scene), m_isAttacking(false), m_isFrontAttacking(false), m_velocity(60.f)
 	{
 		m_minion = m_scene.createEntity("Monk", Textures::Monk, PLAYER_BASE_POSITION, 1);
 		m_minion.assign<Animation>();
@@ -33,6 +33,11 @@ namespace px
 		m_velocity = velocity;
 	}
 
+	void PlayerMinion::setFrontAttacking(const bool & frontAttacking)
+	{
+		m_isFrontAttacking = frontAttacking;
+	}
+
 	void PlayerMinion::addAnimation(Animations::ID id, int row, int frames, sf::Time duration)
 	{
 		thor::FrameAnimation frameAnim;
@@ -52,5 +57,9 @@ namespace px
 	bool PlayerMinion::isAttacking() const
 	{
 		return m_isAttacking;
+	}
+	bool PlayerMinion::isFrontAttacking() const
+	{
+		return false;
 	}
 }

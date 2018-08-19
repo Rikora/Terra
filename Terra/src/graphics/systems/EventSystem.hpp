@@ -4,7 +4,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <utils/Collision.hpp>
-#include <array>
+#include <unordered_set>
 
 namespace px
 {
@@ -21,6 +21,6 @@ namespace px
 
 	private:
 		std::vector<std::unique_ptr<PlayerMinion>> & m_playerMinions;
-		std::array<Entity, 2> m_colliders;
+		std::vector<Entity> m_colliders;
 	};
 }

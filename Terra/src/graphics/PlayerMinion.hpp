@@ -22,16 +22,19 @@ namespace px
 		void attack();
 
 	public:
-		void setVelocity(const float & velocity); // Quick hack for now...
+		void setVelocity(const float & velocity);
+		void setFrontAttacking(const bool & frontAttacking);
 
 	public:
 		Entity getMinion() const;
 		bool isAttacking() const;
+		bool isFrontAttacking() const;
 
 	private:
 		Scene & m_scene;
 		Entity m_minion;
 		bool m_isAttacking;
+		bool m_isFrontAttacking;
 		float m_velocity;
 	};
 }
