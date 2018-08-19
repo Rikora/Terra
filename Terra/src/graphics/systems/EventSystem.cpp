@@ -3,38 +3,41 @@
 ////////////////////////////////////////////////////////////
 #include <graphics/systems/EventSystem.hpp>
 #include <graphics/components/Transform.hpp>
-#include <graphics/PlayerMinion.hpp>
+#include <graphics/components/Animation.hpp>
+#include <graphics/components/PlayerMinionC.hpp>
 
 namespace px
 {
-	EventSystem::EventSystem(std::vector<std::unique_ptr<PlayerMinion>> & playerMinions) : m_playerMinions(playerMinions)
-	{
-	}
-
 	void EventSystem::configure(entityx::EventManager & event_manager)
 	{
 		event_manager.subscribe<utils::Collision>(*this);
 	}
 
-	void EventSystem::update(entityx::EntityManager & entities, entityx::EventManager & events, TimeDelta dt)
+	void EventSystem::update(entityx::EntityManager & es, entityx::EventManager & events, TimeDelta dt)
 	{
+		ComponentHandle<PlayerMinionC> playerMinion, left_minion, right_minion;
+
+		for (auto minion : es.entities_with_components(playerMinion))
+			playerMinion->minion->attack();
+
+		// Only for player monk minions for now
 		if (m_colliders[0] != NULL && m_colliders[1] != NULL)
 		{
-			for (auto & minion_left : m_playerMinions)
+			for (auto left_entity  : es.entities_with_components(left_minion))
 			{
-				for (auto & minion_right : m_playerMinions)
+				for (auto right_entity : es.entities_with_components(right_minion))
 				{
-					if (minion_left == minion_right) continue;
+					if (left_entity == right_entity) continue;
 
 					if (m_colliders[0].component<Transform>()->position.x < m_colliders[1].component<Transform>()->position.x)
 					{
-						if ((minion_left->getMinion() == m_colliders[0]) && (minion_right->getMinion() == m_colliders[1] && minion_right->isAttacking()) || 
-							(minion_left->getMinion() == m_colliders[0]) && (minion_right->getMinion() == m_colliders[1] && minion_right->isFrontAttacking()))
+						if ((left_entity == m_colliders[0]) && (right_entity == m_colliders[1] && right_minion->minion->isAttacking()) ||
+							(left_entity == m_colliders[0]) && (right_entity == m_colliders[1] && right_minion->minion->isFrontAttacking()))
 						{
 							// Halt the minion behind
-							minion_left->setVelocity(0.f);
-							minion_left->playAnimation(Animations::Player_Monk_Idle_Right, true);
-							minion_left->setFrontAttacking(true);
+							left_minion->minion->setVelocity(0.f);
+							left_entity.component<Animation>()->animations->playAnimation(Animations::Player_Monk_Idle_Right, true);
+							left_minion->minion->setFrontAttacking(true);
 						}
 					}
 				}
@@ -44,7 +47,6 @@ namespace px
 
 	void EventSystem::receive(const utils::Collision & collision)
 	{
-		m_colliders[0] = collision.left;
-		m_colliders[1] = collision.right;
+		m_colliders = { collision.left, collision.right };
 	}
 }

@@ -7,15 +7,14 @@
 #include <graphics/systems/TransformSystem.hpp>
 #include <graphics/systems/CollisionSystem.hpp>
 #include <graphics/systems/EventSystem.hpp>
-#include <graphics/PlayerMinion.hpp>
 
 namespace px
 {
-	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, std::vector<std::unique_ptr<PlayerMinion>> & playerMinions) : m_entities(m_events), 
+	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures) : m_entities(m_events), 
 				 m_systems(m_entities, m_events), m_textures(textures)
 	{
 		m_layers = { 0, 1 };
-		initSystems(target, playerMinions);
+		initSystems(target);
 	}
 
 	Entity Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
@@ -26,6 +25,21 @@ namespace px
 		entity.assign<Transform>(position);
 		entity.assign<Render>(std::move(sprite), name, layer);
 		return entity;
+	}
+
+	void Scene::createMonkPlayerMinion()
+	{
+		auto entity = createEntity("Player", Textures::Monk, PLAYER_BASE_POSITION, 1);
+		entity.assign<Animation>();
+		entity.assign<BoundingBox>(sf::Vector2f(32.f, 54.f), sf::Vector2f(15.f, 10.f));
+		entity.assign<PlayerMinionC>(entity);
+
+		// Add animations
+		auto anim = entity.component<Animation>();
+		anim->animations->addAnimation(Animations::Player_Monk_Idle_Right, 11, 1);
+		anim->animations->addAnimation(Animations::Player_Monk_Walk_Right, 11, 9);
+		anim->animations->addAnimation(Animations::Player_Monk_Attack_Right, 15, 6, sf::seconds(0.8f));
+		anim->animations->playAnimation(Animations::Player_Monk_Walk_Right, true);
 	}
 
 	void Scene::destroyEntities()
@@ -66,13 +80,13 @@ namespace px
 		return found;
 	}
 
-	void Scene::initSystems(sf::RenderTarget & target, std::vector<std::unique_ptr<PlayerMinion>> & playerMinions)
+	void Scene::initSystems(sf::RenderTarget & target)
 	{
 		m_systems.add<RenderSystem>(target, m_layers);
 		m_systems.add<TransformSystem>();
 		m_systems.add<AnimationSystem>();
 		m_systems.add<CollisionSystem>();
-		m_systems.add<EventSystem>(playerMinions);
+		m_systems.add<EventSystem>();
 		m_systems.configure();
 	}
 }

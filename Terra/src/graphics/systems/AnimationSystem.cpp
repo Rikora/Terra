@@ -18,8 +18,8 @@ namespace px
 
 		for (auto entity : es.entities_with_components(render, anim))
 		{
-			anim->animator.update(anim->animationClock.restart());
-			anim->animator.animate(*render->sprite);
+			anim->animations->update();
+			anim->animations->animate(*render->sprite);
 		}
 	}
 }

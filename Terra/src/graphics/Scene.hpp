@@ -8,6 +8,7 @@
 #include <graphics/components/Animation.hpp>
 #include <graphics/components/BoundingBox.hpp>
 #include <graphics/components/Transform.hpp>
+#include <graphics/components/PlayerMinionC.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
 
@@ -15,16 +16,15 @@ using namespace entityx;
 
 namespace px
 {
-	class PlayerMinion;
-
 	class Scene : public EntityX
 	{
 	public:
-		explicit Scene(sf::RenderTarget & target, TextureHolder & textures, std::vector<std::unique_ptr<PlayerMinion>> & playerMinions);
+		explicit Scene(sf::RenderTarget & target, TextureHolder & textures);
 		~Scene() = default;
 
 	public:
 		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
+		void createMonkPlayerMinion();
 		void destroyEntities();
 		void updateRenderSystem(TimeDelta dt);
 		void updateTransformSystems(TimeDelta dt);
@@ -34,7 +34,7 @@ namespace px
 		Entity getEntity(const std::string & name);
 
 	private:
-		void initSystems(sf::RenderTarget & target, std::vector<std::unique_ptr<PlayerMinion>> & playerMinions);
+		void initSystems(sf::RenderTarget & target);
 
 	private:
 		EntityManager m_entities;

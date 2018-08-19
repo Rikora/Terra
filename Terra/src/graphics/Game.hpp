@@ -3,16 +3,13 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
-#include <Thor/Animations/FrameAnimation.hpp>
 #include <memory>
 
 namespace px
 {
 	class Scene;
-	class PlayerMinion;
 
 	class Game
 	{
@@ -36,7 +33,5 @@ namespace px
 
 	private:
 		std::unique_ptr<Scene> m_scene;
-		//std::unique_ptr<PlayerMinion> m_minion;
-		std::vector<std::unique_ptr<PlayerMinion>> m_playerMinions;
 	};
 }

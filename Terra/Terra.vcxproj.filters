@@ -26,6 +26,9 @@
     <ClCompile Include="src\graphics\systems\EventSystem.cpp">
       <Filter>Source\Graphics\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\AnimationHelper.cpp">
+      <Filter>Source\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Game.hpp">
@@ -47,9 +50,6 @@
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\Helper.hpp">
-      <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utils\Utility.hpp">
       <Filter>Source\Utility</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\components\Animation.hpp">
@@ -78,6 +78,12 @@
     </ClInclude>
     <ClInclude Include="src\graphics\systems\EventSystem.hpp">
       <Filter>Source\Graphics\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\AnimationHelper.hpp">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\components\PlayerMinionC.hpp">
+      <Filter>Source\Graphics\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,9 +3,7 @@
 ////////////////////////////////////////////////////////////
 #include <graphics/Game.hpp>
 #include <graphics/Scene.hpp>
-#include <graphics/PlayerMinion.hpp>
 #include <utils/Helper.hpp>
-#include <utils/Utility.hpp>
 #include <SFML/Window/Event.hpp>
 
 namespace px
@@ -37,13 +35,7 @@ namespace px
 
 	void Game::initScene()
 	{
-		m_scene = std::make_unique<Scene>(m_window, m_textures, m_playerMinions);
-		/*m_minion = std::make_unique<PlayerMinion>(*m_scene.get());
-		m_minion->addAnimation(Animations::Player_Monk_Idle_Right, 11, 1);
-		m_minion->addAnimation(Animations::Player_Monk_Walk_Right, 11, 9);
-		m_minion->addAnimation(Animations::Player_Monk_Attack_Right, 15, 6, sf::seconds(0.8f));
-		m_minion->playAnimation(Animations::Player_Monk_Walk_Right, true);*/
-
+		m_scene = std::make_unique<Scene>(m_window, m_textures);
 		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
 	}
 
@@ -55,23 +47,12 @@ namespace px
 			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
-			{	
-				auto minion = std::make_unique<PlayerMinion>(*m_scene.get());
-				minion->addAnimation(Animations::Player_Monk_Idle_Right, 11, 1);
-				minion->addAnimation(Animations::Player_Monk_Walk_Right, 11, 9);
-				minion->addAnimation(Animations::Player_Monk_Attack_Right, 15, 6, sf::seconds(0.8f));
-				minion->playAnimation(Animations::Player_Monk_Walk_Right, true);
-				m_playerMinions.push_back(std::move(minion));
-			}
+				m_scene->createMonkPlayerMinion();
 		}
 	}
 
 	void Game::update(double dt)
 	{
-		for (auto & minion : m_playerMinions)
-			minion->attack();
-
-		//m_minion->attack();
 		m_scene->updateTransformSystems(timestep);
 	}
 

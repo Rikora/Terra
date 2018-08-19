@@ -3,18 +3,14 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <utils/ResourceHolder.hpp>
-#include <utils/ResourceIdentifiers.hpp>
-#include <Thor/Animations/FrameAnimation.hpp>
+#include <utils/AnimationHelper.hpp>
 
 namespace px
 {
 	struct Animation
 	{
-		Animation() : animator(animations) {}
+		Animation() : animations(std::make_unique<utils::AnimationHelper>())  {}
 
-		AnimationsHolder animations;
-		Animator animator;
-		sf::Clock animationClock;
+		std::unique_ptr<utils::AnimationHelper> animations;
 	};
 }
