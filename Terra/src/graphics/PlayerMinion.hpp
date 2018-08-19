@@ -21,11 +21,17 @@ namespace px
 		void playAnimation(Animations::ID id, bool repeat = false);
 		void attack();
 
-	private:
+	public:
+		void setVelocity(const float & velocity); // Quick hack for now...
+
+	public:
+		Entity getMinion() const;
+		bool isAttacking() const;
 
 	private:
 		Scene & m_scene;
 		Entity m_minion;
 		bool m_isAttacking;
+		float m_velocity;
 	};
 }

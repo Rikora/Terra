@@ -13,17 +13,14 @@
 
 using namespace entityx;
 
-namespace sf
-{
-	class RenderTarget;
-}
-
 namespace px
 {
+	class PlayerMinion;
+
 	class Scene : public EntityX
 	{
 	public:
-		explicit Scene(sf::RenderTarget & target, TextureHolder & textures);
+		explicit Scene(sf::RenderTarget & target, TextureHolder & textures, std::vector<std::unique_ptr<PlayerMinion>> & playerMinions);
 		~Scene() = default;
 
 	public:
@@ -37,7 +34,7 @@ namespace px
 		Entity getEntity(const std::string & name);
 
 	private:
-		void initSystems(sf::RenderTarget & target);
+		void initSystems(sf::RenderTarget & target, std::vector<std::unique_ptr<PlayerMinion>> & playerMinions);
 
 	private:
 		EntityManager m_entities;

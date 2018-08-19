@@ -37,7 +37,7 @@ namespace px
 
 	void Game::initScene()
 	{
-		m_scene = std::make_unique<Scene>(m_window, m_textures);
+		m_scene = std::make_unique<Scene>(m_window, m_textures, m_playerMinions);
 		/*m_minion = std::make_unique<PlayerMinion>(*m_scene.get());
 		m_minion->addAnimation(Animations::Player_Monk_Idle_Right, 11, 1);
 		m_minion->addAnimation(Animations::Player_Monk_Walk_Right, 11, 9);

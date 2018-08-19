@@ -23,6 +23,9 @@
     <ClCompile Include="src\graphics\systems\CollisionSystem.cpp">
       <Filter>Source\Graphics\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\systems\EventSystem.cpp">
+      <Filter>Source\Graphics\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Game.hpp">

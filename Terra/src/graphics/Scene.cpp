@@ -7,14 +7,15 @@
 #include <graphics/systems/TransformSystem.hpp>
 #include <graphics/systems/CollisionSystem.hpp>
 #include <graphics/systems/EventSystem.hpp>
+#include <graphics/PlayerMinion.hpp>
 
 namespace px
 {
-	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures) : m_entities(m_events), m_systems(m_entities, m_events),
-																		m_textures(textures)
+	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, std::vector<std::unique_ptr<PlayerMinion>> & playerMinions) : m_entities(m_events), 
+				 m_systems(m_entities, m_events), m_textures(textures)
 	{
 		m_layers = { 0, 1 };
-		initSystems(target);
+		initSystems(target, playerMinions);
 	}
 
 	Entity Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
@@ -65,13 +66,13 @@ namespace px
 		return found;
 	}
 
-	void Scene::initSystems(sf::RenderTarget & target)
+	void Scene::initSystems(sf::RenderTarget & target, std::vector<std::unique_ptr<PlayerMinion>> & playerMinions)
 	{
 		m_systems.add<RenderSystem>(target, m_layers);
 		m_systems.add<TransformSystem>();
 		m_systems.add<AnimationSystem>();
 		m_systems.add<CollisionSystem>();
-		m_systems.add<EventSystem>();
+		m_systems.add<EventSystem>(playerMinions);
 		m_systems.configure();
 	}
 }
