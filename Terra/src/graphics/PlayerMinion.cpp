@@ -23,7 +23,7 @@ namespace px
 			if (!m_isAttacking)
 			{
 				m_minion.component<Animation>()->animator.stop();
-				playAnimation(Animations::Player_Monk_Idle_Right, true);
+				playAnimation(Animations::Player_Monk_Attack_Right, true);
 				m_isAttacking = true;
 			}
 		}

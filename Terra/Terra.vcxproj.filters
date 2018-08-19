@@ -73,7 +73,7 @@
     <ClInclude Include="src\utils\Collision.hpp">
       <Filter>Source\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\systems\DebugSystem.hpp">
+    <ClInclude Include="src\graphics\systems\EventSystem.hpp">
       <Filter>Source\Graphics\Systems</Filter>
     </ClInclude>
   </ItemGroup>

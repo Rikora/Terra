@@ -158,7 +158,7 @@
     <ClInclude Include="src\graphics\Scene.hpp" />
     <ClInclude Include="src\graphics\systems\AnimationSystem.hpp" />
     <ClInclude Include="src\graphics\systems\CollisionSystem.hpp" />
-    <ClInclude Include="src\graphics\systems\DebugSystem.hpp" />
+    <ClInclude Include="src\graphics\systems\EventSystem.hpp" />
     <ClInclude Include="src\graphics\systems\RenderSystem.hpp" />
     <ClInclude Include="src\graphics\systems\TransformSystem.hpp" />
     <ClInclude Include="src\utils\Collision.hpp" />

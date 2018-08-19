@@ -6,7 +6,7 @@
 #include <graphics/systems/AnimationSystem.hpp>
 #include <graphics/systems/TransformSystem.hpp>
 #include <graphics/systems/CollisionSystem.hpp>
-#include <graphics/systems/DebugSystem.hpp>
+#include <graphics/systems/EventSystem.hpp>
 
 namespace px
 {
@@ -42,7 +42,7 @@ namespace px
 
 	void Scene::updateTransformSystems(TimeDelta dt)
 	{
-		m_systems.update<DebugSystem>(dt);
+		m_systems.update<EventSystem>(dt);
 		m_systems.update<TransformSystem>(dt);
 		m_systems.update<AnimationSystem>(dt);
 		m_systems.update<CollisionSystem>(dt);
@@ -71,7 +71,7 @@ namespace px
 		m_systems.add<TransformSystem>();
 		m_systems.add<AnimationSystem>();
 		m_systems.add<CollisionSystem>();
-		m_systems.add<DebugSystem>();
+		m_systems.add<EventSystem>();
 		m_systems.configure();
 	}
 }
