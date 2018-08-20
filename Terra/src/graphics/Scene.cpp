@@ -7,11 +7,12 @@
 #include <graphics/systems/TransformSystem.hpp>
 #include <graphics/systems/CollisionSystem.hpp>
 #include <graphics/systems/EventSystem.hpp>
+#include <utils/GameManager.hpp>
 
 namespace px
 {
-	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts) : m_entities(m_events),
-				 m_systems(m_entities, m_events), m_textures(textures), m_fonts(fonts)
+	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts, utils::GameManager & gameManager) : m_entities(m_events),
+				 m_systems(m_entities, m_events), m_textures(textures), m_fonts(fonts), m_gameManager(gameManager)
 	{
 		m_layers = { 0, 1 };
 		initSystems(target);
@@ -27,11 +28,12 @@ namespace px
 		return entity;
 	}
 
-	Entity Scene::createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position)
+	Entity Scene::createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position, const sf::Color & color)
 	{
 		// Change origin?
 		auto entity = m_entities.create();
 		auto text = std::make_unique<sf::Text>(name, m_fonts.GetResource(fontID), fontSize);
+		text->setFillColor(color);
 		text->setPosition(position);
 		entity.assign<Transform>(position);
 		entity.assign<Text>(std::move(text));
@@ -51,6 +53,7 @@ namespace px
 		anim->animations->addAnimation("walk", 11, 9);
 		anim->animations->addAnimation("attack", 15, 6, sf::seconds(0.8f));
 		anim->animations->playAnimation("walk", true);
+		m_gameManager.playerGold -= m_gameManager.playerMonkCost;
 	}
 
 	void Scene::destroyEntities()

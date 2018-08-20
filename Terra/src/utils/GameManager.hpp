@@ -5,5 +5,14 @@
 ////////////////////////////////////////////////////////////
 #include <utils/Helper.hpp>
 
-static uint playerGold = 1000;
-static uint playerMonkCost = 100;
+namespace px
+{
+	namespace utils
+	{
+		struct GameManager
+		{
+			uint playerGold = 1000;
+			uint playerMonkCost = 100;
+		};
+	}
+}

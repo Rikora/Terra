@@ -17,15 +17,17 @@ using namespace entityx;
 
 namespace px
 {
+	namespace utils { struct GameManager; }
+
 	class Scene : public EntityX
 	{
 	public:
-		explicit Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts);
+		explicit Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts, utils::GameManager & gameManager);
 		~Scene() = default;
 
 	public:
 		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
-		Entity createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position);
+		Entity createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position, const sf::Color & color = sf::Color::White);
 		void createPlayerMonk();
 		void destroyEntities();
 		void updateRenderSystem(TimeDelta dt);
@@ -44,6 +46,7 @@ namespace px
 		SystemManager m_systems;
 		TextureHolder & m_textures;
 		FontHolder & m_fonts;
+		utils::GameManager & m_gameManager;
 		std::vector<uint> m_layers;
 	};
 }
