@@ -141,11 +141,6 @@
   <ItemGroup>
     <ClCompile Include="src\graphics\Game.cpp" />
     <ClCompile Include="src\graphics\Scene.cpp" />
-    <ClCompile Include="src\graphics\systems\AnimationSystem.cpp" />
-    <ClCompile Include="src\graphics\systems\CollisionSystem.cpp" />
-    <ClCompile Include="src\graphics\systems\EventSystem.cpp" />
-    <ClCompile Include="src\graphics\systems\RenderSystem.cpp" />
-    <ClCompile Include="src\graphics\systems\TransformSystem.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\utils\AnimationHelper.cpp" />
   </ItemGroup>

@@ -5,23 +5,8 @@
     <ClCompile Include="src\graphics\Game.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\systems\RenderSystem.cpp">
-      <Filter>Source\Graphics\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\Scene.cpp">
       <Filter>Source\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\systems\AnimationSystem.cpp">
-      <Filter>Source\Graphics\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\systems\TransformSystem.cpp">
-      <Filter>Source\Graphics\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\systems\CollisionSystem.cpp">
-      <Filter>Source\Graphics\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\systems\EventSystem.cpp">
-      <Filter>Source\Graphics\Systems</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\AnimationHelper.cpp">
       <Filter>Source\Utility</Filter>
