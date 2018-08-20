@@ -6,4 +6,4 @@
 #include <utils/Helper.hpp>
 
 static uint playerGold = 1000;
-static uint playerMinionMonkCost = 100;
+static uint playerMonkCost = 100;

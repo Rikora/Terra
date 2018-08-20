@@ -38,7 +38,7 @@ namespace px
 		return entity;
 	}
 
-	void Scene::createMonkPlayerMinion()
+	void Scene::createPlayerMonk()
 	{
 		auto entity = createEntity("Player", Textures::Monk, PLAYER_BASE_POSITION, 1);
 		entity.assign<Animation>();

@@ -26,7 +26,7 @@ namespace px
 	public:
 		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
 		Entity createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position);
-		void createMonkPlayerMinion();
+		void createPlayerMonk();
 		void destroyEntities();
 		void updateRenderSystem(TimeDelta dt);
 		void updateTransformSystems(TimeDelta dt);

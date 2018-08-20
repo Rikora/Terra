@@ -53,8 +53,8 @@ namespace px
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
-				m_scene->createMonkPlayerMinion();
-				playerGold -= playerMinionMonkCost;
+				m_scene->createPlayerMonk();
+				playerGold -= playerMonkCost;
 			}
 		}
 	}
