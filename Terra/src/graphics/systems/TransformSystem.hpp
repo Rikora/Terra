@@ -7,6 +7,7 @@
 #include <graphics/components/Render.hpp>
 #include <graphics/components/Transform.hpp>
 #include <graphics/components/BoundingBox.hpp>
+#include <graphics/components/Text.hpp>
 
 using namespace entityx;
 
@@ -18,6 +19,7 @@ namespace px
 		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
 		{
 			ComponentHandle<Render> render;
+			ComponentHandle<Text> text;
 			ComponentHandle<Transform> trans;
 
 			for (auto entity : es.entities_with_components(render, trans))
@@ -32,6 +34,9 @@ namespace px
 					box->boundingBox.top = trans->position.y;
 				}
 			}
+
+			for (auto entity : es.entities_with_components(text, trans))
+				text->text->setPosition(trans->position);
 		}
 	};
 }

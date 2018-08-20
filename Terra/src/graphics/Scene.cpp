@@ -10,8 +10,8 @@
 
 namespace px
 {
-	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures) : m_entities(m_events), 
-				 m_systems(m_entities, m_events), m_textures(textures)
+	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts) : m_entities(m_events),
+				 m_systems(m_entities, m_events), m_textures(textures), m_fonts(fonts)
 	{
 		m_layers = { 0, 1 };
 		initSystems(target);
@@ -27,11 +27,22 @@ namespace px
 		return entity;
 	}
 
+	Entity Scene::createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position)
+	{
+		// Change origin?
+		auto entity = m_entities.create();
+		auto text = std::make_unique<sf::Text>(name, m_fonts.GetResource(fontID), fontSize);
+		text->setPosition(position);
+		entity.assign<Transform>(position);
+		entity.assign<Text>(std::move(text));
+		return entity;
+	}
+
 	void Scene::createMonkPlayerMinion()
 	{
 		auto entity = createEntity("Player", Textures::Monk, PLAYER_BASE_POSITION, 1);
 		entity.assign<Animation>();
-		entity.assign<BoundingBox>(sf::Vector2f(32.f, 54.f), sf::Vector2f(15.f, 10.f));
+		entity.assign<BoundingBox>(sf::Vector2f(40.f, 54.f), sf::Vector2f(11.f, 10.f));
 		entity.assign<PlayerMinion>();
 
 		// Add animations

@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Shape.hpp>
 #include <graphics/components/Render.hpp>
 #include <graphics/components/BoundingBox.hpp>
+#include <graphics/components/Text.hpp>
 #include <utils/Helper.hpp>
 
 using namespace entityx;
@@ -28,6 +29,7 @@ namespace px
 		virtual void update(EntityManager &es, EventManager &events, TimeDelta dt) override
 		{
 			ComponentHandle<Render> render;
+			ComponentHandle<Text> text;
 
 			for (auto layer : m_layers)
 			{
@@ -45,6 +47,9 @@ namespace px
 					}
 				}
 			}
+
+			for (auto entity : es.entities_with_components(text))
+				m_target.draw(*text->text.get());
 		}
 
 	private:

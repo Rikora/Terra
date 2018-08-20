@@ -21,7 +21,7 @@ namespace Fonts
 {
 	enum ID
 	{
-		Main
+		Game
 	};
 }
 

@@ -5,7 +5,10 @@
 ////////////////////////////////////////////////////////////
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
+#include <entityx/Entity.h>
 #include <memory>
+
+using namespace entityx;
 
 namespace px
 {
@@ -29,7 +32,8 @@ namespace px
 		sf::RenderWindow m_window;
 		TextureHolder m_textures;
 		ImageHolder m_images;
-		//FontHolder m_fonts;
+		FontHolder m_fonts;
+		Entity m_goldText;
 
 	private:
 		std::unique_ptr<Scene> m_scene;

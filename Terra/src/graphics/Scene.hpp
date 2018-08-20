@@ -9,6 +9,7 @@
 #include <graphics/components/BoundingBox.hpp>
 #include <graphics/components/Transform.hpp>
 #include <graphics/components/PlayerMinion.hpp>
+#include <graphics/components/Text.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
 
@@ -19,11 +20,12 @@ namespace px
 	class Scene : public EntityX
 	{
 	public:
-		explicit Scene(sf::RenderTarget & target, TextureHolder & textures);
+		explicit Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts);
 		~Scene() = default;
 
 	public:
 		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
+		Entity createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position);
 		void createMonkPlayerMinion();
 		void destroyEntities();
 		void updateRenderSystem(TimeDelta dt);
@@ -41,6 +43,7 @@ namespace px
 		EventManager m_events;
 		SystemManager m_systems;
 		TextureHolder & m_textures;
+		FontHolder & m_fonts;
 		std::vector<uint> m_layers;
 	};
 }

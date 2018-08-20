@@ -4,6 +4,7 @@
 #include <graphics/Game.hpp>
 #include <graphics/Scene.hpp>
 #include <utils/Helper.hpp>
+#include <utils/GameManager.hpp>
 #include <SFML/Window/Event.hpp>
 
 namespace px
@@ -31,12 +32,16 @@ namespace px
 		m_images.LoadResource(Textures::Icon, "src/res/icon/dragon.png");
 		m_textures.LoadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
 		m_textures.LoadResource(Textures::Background, "src/res/sprites/wizardtower.png");
+
+		// Fonts
+		m_fonts.LoadResource(Fonts::Game, "src/res/fonts/coolstory_regular.ttf");
 	}
 
 	void Game::initScene()
 	{
-		m_scene = std::make_unique<Scene>(m_window, m_textures);
+		m_scene = std::make_unique<Scene>(m_window, m_textures, m_fonts);
 		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
+		m_goldText = m_scene->createText("Gold: " + std::to_string(playerGold), Fonts::Game, 20, sf::Vector2f(100.f, 200.f)); 
 	}
 
 	void Game::pollEvents()
@@ -47,12 +52,16 @@ namespace px
 			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+			{
 				m_scene->createMonkPlayerMinion();
+				playerGold -= playerMinionMonkCost;
+			}
 		}
 	}
 
 	void Game::update(double dt)
 	{
+		m_goldText.component<Text>()->text->setString("Gold: " + std::to_string(playerGold));
 		m_scene->updateTransformSystems(timestep);
 	}
 
