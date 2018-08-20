@@ -7,10 +7,6 @@
 
 namespace px
 {
-	AnimationSystem::AnimationSystem()
-	{
-	}
-
 	void AnimationSystem::update(EntityManager & es, EventManager & events, TimeDelta dt)
 	{
 		ComponentHandle<Render> render;

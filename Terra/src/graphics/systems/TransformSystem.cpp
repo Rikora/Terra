@@ -5,10 +5,6 @@
 
 namespace px
 {
-	TransformSystem::TransformSystem()
-	{
-	}
-
 	void TransformSystem::update(EntityManager & es, EventManager & events, TimeDelta dt)
 	{
 		ComponentHandle<Render> render;

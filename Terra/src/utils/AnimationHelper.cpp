@@ -11,13 +11,13 @@ namespace px
 		{
 		}
 
-		void AnimationHelper::addAnimation(Animations::ID id, int row, int frames, sf::Time duration)
+		void AnimationHelper::addAnimation(const std::string & id, int row, int frames, sf::Time duration)
 		{
 			thor::FrameAnimation frameAnim;
 			m_animations.addAnimation(id, addFrames(frameAnim, row, frames), duration);
 		}
 
-		void AnimationHelper::playAnimation(Animations::ID id, bool repeat)
+		void AnimationHelper::playAnimation(const std::string & id, bool repeat)
 		{
 			repeat ? m_animator.play() << id << thor::Playback::loop(id) : m_animator.play();
 		}

@@ -8,7 +8,7 @@
 #include <graphics/components/Animation.hpp>
 #include <graphics/components/BoundingBox.hpp>
 #include <graphics/components/Transform.hpp>
-#include <graphics/components/PlayerMinionC.hpp>
+#include <graphics/components/PlayerMinion.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
 

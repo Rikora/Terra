@@ -4,7 +4,7 @@
 #include <graphics/systems/EventSystem.hpp>
 #include <graphics/components/Transform.hpp>
 #include <graphics/components/Animation.hpp>
-#include <graphics/components/PlayerMinionC.hpp>
+#include <graphics/components/PlayerMinion.hpp>
 
 namespace px
 {
@@ -15,10 +15,10 @@ namespace px
 
 	void EventSystem::update(entityx::EntityManager & es, entityx::EventManager & events, TimeDelta dt)
 	{
-		ComponentHandle<PlayerMinionC> playerMinion, left_minion, right_minion;
+		ComponentHandle<PlayerMinion> playerMinion, left_minion, right_minion;
 
 		for (auto minion : es.entities_with_components(playerMinion))
-			playerMinion->minion->attack();
+			playerMinion->minion->attack(minion);
 
 		// Only for player monk minions for now
 		if (m_colliders[0] != NULL && m_colliders[1] != NULL)
@@ -36,7 +36,7 @@ namespace px
 						{
 							// Halt the minion behind
 							left_minion->minion->setVelocity(0.f);
-							left_entity.component<Animation>()->animations->playAnimation(Animations::Player_Monk_Idle_Right, true);
+							left_entity.component<Animation>()->animations->playAnimation("idle", true);
 							left_minion->minion->setFrontAttacking(true);
 						}
 					}

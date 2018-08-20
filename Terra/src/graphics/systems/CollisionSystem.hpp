@@ -12,9 +12,6 @@ namespace px
 	class CollisionSystem : public System<CollisionSystem>
 	{
 	public:
-		CollisionSystem();
-
-	public:
 		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override;
 	};
 }

@@ -140,7 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\Game.cpp" />
-    <ClCompile Include="src\graphics\PlayerMinion.cpp" />
     <ClCompile Include="src\graphics\Scene.cpp" />
     <ClCompile Include="src\graphics\systems\AnimationSystem.cpp" />
     <ClCompile Include="src\graphics\systems\CollisionSystem.cpp" />
@@ -153,11 +152,10 @@
   <ItemGroup>
     <ClInclude Include="src\graphics\components\Animation.hpp" />
     <ClInclude Include="src\graphics\components\BoundingBox.hpp" />
-    <ClInclude Include="src\graphics\components\PlayerMinionC.hpp" />
+    <ClInclude Include="src\graphics\components\PlayerMinion.hpp" />
     <ClInclude Include="src\graphics\components\Render.hpp" />
     <ClInclude Include="src\graphics\components\Transform.hpp" />
     <ClInclude Include="src\graphics\Game.hpp" />
-    <ClInclude Include="src\graphics\PlayerMinion.hpp" />
     <ClInclude Include="src\graphics\Scene.hpp" />
     <ClInclude Include="src\graphics\systems\AnimationSystem.hpp" />
     <ClInclude Include="src\graphics\systems\CollisionSystem.hpp" />

@@ -18,8 +18,8 @@ namespace px
 			~AnimationHelper() = default;
 
 		public:
-			void addAnimation(Animations::ID id, int row, int frames, sf::Time duration = sf::seconds(1.f));
-			void playAnimation(Animations::ID id, bool repeat = false);
+			void addAnimation(const std::string & id, int row, int frames, sf::Time duration = sf::seconds(1.f));
+			void playAnimation(const std::string & id, bool repeat = false);
 			void update();
 			void animate(sf::Sprite & sprite);
 

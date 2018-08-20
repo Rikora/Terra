@@ -32,14 +32,14 @@ namespace px
 		auto entity = createEntity("Player", Textures::Monk, PLAYER_BASE_POSITION, 1);
 		entity.assign<Animation>();
 		entity.assign<BoundingBox>(sf::Vector2f(32.f, 54.f), sf::Vector2f(15.f, 10.f));
-		entity.assign<PlayerMinionC>(entity);
+		entity.assign<PlayerMinion>();
 
 		// Add animations
 		auto anim = entity.component<Animation>();
-		anim->animations->addAnimation(Animations::Player_Monk_Idle_Right, 11, 1);
-		anim->animations->addAnimation(Animations::Player_Monk_Walk_Right, 11, 9);
-		anim->animations->addAnimation(Animations::Player_Monk_Attack_Right, 15, 6, sf::seconds(0.8f));
-		anim->animations->playAnimation(Animations::Player_Monk_Walk_Right, true);
+		anim->animations->addAnimation("idle", 11, 1);
+		anim->animations->addAnimation("walk", 11, 9);
+		anim->animations->addAnimation("attack", 15, 6, sf::seconds(0.8f));
+		anim->animations->playAnimation("walk", true);
 	}
 
 	void Scene::destroyEntities()

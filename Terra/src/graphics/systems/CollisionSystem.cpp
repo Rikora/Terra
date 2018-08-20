@@ -7,10 +7,6 @@
 
 namespace px
 {
-	CollisionSystem::CollisionSystem()
-	{
-	}
-
 	void CollisionSystem::update(EntityManager & es, EventManager & events, TimeDelta dt)
 	{
 		ComponentHandle<BoundingBox> left_box, right_box;
