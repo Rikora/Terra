@@ -8,7 +8,7 @@
 #include <graphics/components/Animation.hpp>
 #include <graphics/components/BoundingBox.hpp>
 #include <graphics/components/Transform.hpp>
-#include <graphics/components/PlayerMinion.hpp>
+#include <graphics/components/Minion.hpp>
 #include <graphics/components/Text.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
@@ -29,6 +29,7 @@ namespace px
 		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
 		Entity createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position, const sf::Color & color = sf::Color::White);
 		void createPlayerMonk();
+		void createEnemyOrc();
 		void destroyEntities();
 		void updateRenderSystem(TimeDelta dt);
 		void updateTransformSystems(TimeDelta dt);

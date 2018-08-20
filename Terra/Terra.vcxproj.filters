@@ -55,20 +55,20 @@
     <ClInclude Include="src\utils\Collision.hpp">
       <Filter>Source\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\systems\EventSystem.hpp">
-      <Filter>Source\Graphics\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="src\utils\AnimationHelper.hpp">
       <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\components\PlayerMinion.hpp">
-      <Filter>Source\Graphics\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\GameManager.hpp">
       <Filter>Source\Utility</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\components\Text.hpp">
       <Filter>Source\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\components\Minion.hpp">
+      <Filter>Source\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\systems\MinionSystem.hpp">
+      <Filter>Source\Graphics\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

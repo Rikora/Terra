@@ -28,8 +28,9 @@ namespace px
 	{
 		// Textures
 		m_images.LoadResource(Textures::Icon, "src/res/icon/dragon.png");
-		m_textures.LoadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
 		m_textures.LoadResource(Textures::Background, "src/res/sprites/wizardtower.png");
+		m_textures.LoadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
+		m_textures.LoadResource(Textures::SpearOrc, "src/res/sprites/spearOrc.png");
 
 		// Fonts
 		m_fonts.LoadResource(Fonts::Game, "src/res/fonts/coolstory_regular.ttf");
@@ -39,7 +40,7 @@ namespace px
 	{
 		m_scene = std::make_unique<Scene>(m_window, m_textures, m_fonts, m_gameManager);
 		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
-		m_goldText = m_scene->createText("Gold: " + std::to_string(m_gameManager.playerGold), Fonts::Game, 22, sf::Vector2f(30.f, 60.f), sf::Color::Yellow);
+		m_goldText = m_scene->createText("Gold: " + std::to_string(m_gameManager.playerGold), Fonts::Game, 22, sf::Vector2f(30.f, 35.f), sf::Color::Yellow);
 		m_goldText.component<Text>()->text->setOutlineThickness(2.f);
 	}
 
@@ -51,7 +52,7 @@ namespace px
 			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
-				m_scene->createPlayerMonk();
+				m_scene->createEnemyOrc();
 		}
 	}
 

@@ -11,9 +11,9 @@ namespace Textures
 	enum ID
 	{
 		Icon,
-		Monk,
 		Background,
-		PlaceHolder,
+		Monk,
+		SpearOrc
 	};
 }
 

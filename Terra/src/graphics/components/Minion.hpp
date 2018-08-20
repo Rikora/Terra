@@ -10,13 +10,14 @@ namespace px
 	class MinionScript
 	{
 	public:
-		MinionScript() : m_isAttacking(false), m_isFrontAttacking(false), m_velocity(60.f) {};
+		MinionScript(const float & velocity) : m_isAttacking(false), m_isFrontAttacking(false), m_velocity(velocity) {};
 		~MinionScript() = default;
 
 	public:
 		void attack(Entity & minion)
 		{
-			if (minion.component<Transform>()->position.x < 300.f)
+			// This should be replaced with enemy/player collision notifier code
+			if (minion.component<Transform>()->position.x > 600.f)
 				minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (1.f / 60.f);
 			else
 			{
@@ -24,7 +25,7 @@ namespace px
 				{
 					minion.component<Animation>()->animations->playAnimation("attack", true);
 					m_isAttacking = true;
-					//m_velocity = 0.f;
+					m_velocity = 0.f;
 				}
 			}
 		}
@@ -43,9 +44,9 @@ namespace px
 		bool m_isFrontAttacking;
 	};
 
-	struct PlayerMinion
+	struct Minion
 	{
-		PlayerMinion() : minion(std::make_unique<MinionScript>()) {}
+		Minion(const float & velocity) : minion(std::make_unique<MinionScript>(velocity)) {}
 
 		std::unique_ptr<MinionScript> minion;
 	};
