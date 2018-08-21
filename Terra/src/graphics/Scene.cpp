@@ -40,35 +40,42 @@ namespace px
 		return entity;
 	}
 
-	void Scene::createPlayerMonk()
+	void Scene::createMinion(const std::string & name, Textures::ID texID)
 	{
-		auto entity = createEntity("Player", Textures::Monk, PLAYER_BASE_POSITION, 1);
-		entity.assign<Animation>();
-		entity.assign<BoundingBox>(sf::Vector2f(40.f, 54.f), sf::Vector2f(11.f, 10.f));
-		entity.assign<Minion>(60.f);
+		// Better to store data in a json file instead?
+		if (name == "Player")
+		{
+			auto entity = createEntity(name, texID, PLAYER_BASE_POSITION, 1);
+			entity.assign<Animation>();
+			entity.assign<BoundingBox>(sf::Vector2f(40.f, 54.f), sf::Vector2f(11.f, 10.f));
+			entity.assign<Minion>(60.f);
+			auto anim = entity.component<Animation>();
 
-		// Add animations
-		auto anim = entity.component<Animation>();
-		anim->animations->addAnimation("idle", 11, 1);
-		anim->animations->addAnimation("walk", 11, 9);
-		anim->animations->addAnimation("attack", 15, 6, sf::seconds(0.8f));
-		anim->animations->playAnimation("walk", true);
-		m_gameManager.playerGold -= m_gameManager.playerMonkCost;
-	}
+			if (texID == Textures::Monk)
+			{
+				anim->animations->addAnimation("idle", 11, 1);
+				anim->animations->addAnimation("walk", 11, 9);
+				anim->animations->addAnimation("attack", 15, 6, sf::seconds(0.8f));
+				anim->animations->playAnimation("walk", true);
+				m_gameManager.playerGold -= m_gameManager.playerMonkCost;
+			}
+		}
+		else if (name == "Enemy")
+		{
+			auto entity = createEntity(name, texID, ENEMY_BASE_POSITION, 1);
+			entity.assign<Animation>();
+			entity.assign<BoundingBox>(sf::Vector2f(40.f, 54.f), sf::Vector2f(11.f, 10.f));
+			entity.assign<Minion>(-60.f);
+			auto anim = entity.component<Animation>();
 
-	void Scene::createEnemyOrc()
-	{
-		auto entity = createEntity("Enemy", Textures::SpearOrc, ENEMY_BASE_POSITION, 1);
-		entity.assign<Animation>();
-		entity.assign<BoundingBox>(sf::Vector2f(40.f, 54.f), sf::Vector2f(11.f, 10.f));
-		entity.assign<Minion>(-60.f);
-
-		// Add animations
-		auto anim = entity.component<Animation>();
-		anim->animations->addAnimation("idle", 9, 1);
-		anim->animations->addAnimation("walk", 9, 9);
-		anim->animations->addAnimation("attack", 5, 8, sf::seconds(0.8f));
-		anim->animations->playAnimation("walk", true);
+			if (texID == Textures::SpearOrc)
+			{
+				anim->animations->addAnimation("idle", 9, 1);
+				anim->animations->addAnimation("walk", 9, 9);
+				anim->animations->addAnimation("attack", 5, 8, sf::seconds(0.8f));
+				anim->animations->playAnimation("walk", true);
+			}
+		}
 	}
 
 	void Scene::destroyEntities()
@@ -90,11 +97,6 @@ namespace px
 		m_systems.update<TransformSystem>(dt);
 		m_systems.update<AnimationSystem>(dt);
 		m_systems.update<CollisionSystem>(dt);
-	}
-
-	EntityManager & Scene::getEntities()
-	{
-		return m_entities;
 	}
 
 	Entity Scene::getEntity(const std::string & name)
