@@ -6,8 +6,10 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics/Shape.hpp>
 #include <graphics/components/Render.hpp>
+#include <graphics/components/Transform.hpp>
 #include <graphics/components/BoundingBox.hpp>
 #include <graphics/components/Text.hpp>
+#include <graphics/components/Minion.hpp>
 #include <utils/Helper.hpp>
 
 using namespace entityx;
@@ -16,6 +18,7 @@ namespace sf
 {
 	class RenderTarget;
 	class RectangleShape;
+	class CircleShape;
 }
 
 namespace px
@@ -42,7 +45,13 @@ namespace px
 						if (entity.has_component<BoundingBox>())
 						{
 							auto box = entity.component<BoundingBox>();
-							m_target.draw(getBoundingRect(box->boundingBox, box->offset));
+							m_target.draw(drawRect(box->boundingBox));
+						}
+
+						if (entity.has_component<Minion>())
+						{
+							auto minion = entity.component<Minion>();
+							m_target.draw(drawCircle(minion->minion->getFrontCollider()));
 						}
 					}
 				}
@@ -53,11 +62,22 @@ namespace px
 		}
 
 	private:
-		sf::RectangleShape getBoundingRect(const sf::FloatRect & rect, const sf::Vector2f & offset)
+		sf::RectangleShape drawRect(const sf::FloatRect & rect)
 		{
 			sf::RectangleShape shape;
-			shape.setPosition(sf::Vector2f(rect.left + offset.x, rect.top + offset.y));
+			shape.setPosition(sf::Vector2f(rect.left, rect.top));
 			shape.setSize(sf::Vector2f(rect.width, rect.height));
+			shape.setFillColor(sf::Color::Transparent);
+			shape.setOutlineColor(sf::Color::Green);
+			shape.setOutlineThickness(1.f);
+			return shape;
+		}
+
+		sf::CircleShape drawCircle(const sf::Vector2f & position)
+		{
+			sf::CircleShape shape;
+			shape.setPosition(position);
+			shape.setRadius(3.f);
 			shape.setFillColor(sf::Color::Transparent);
 			shape.setOutlineColor(sf::Color::Green);
 			shape.setOutlineThickness(1.f);
