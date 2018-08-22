@@ -14,7 +14,7 @@ namespace px
 	{
 		m_window.setVerticalSyncEnabled(true);
 		loadResources();
-		sf::Image icon = m_images.GetResource(Textures::Icon);
+		sf::Image icon = m_images.getResource(Textures::Icon);
 		m_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		initScene();
 	}
@@ -27,13 +27,13 @@ namespace px
 	void Game::loadResources()
 	{
 		// Textures
-		m_images.LoadResource(Textures::Icon, "src/res/icon/dragon.png");
-		m_textures.LoadResource(Textures::Background, "src/res/sprites/wizardtower.png");
-		m_textures.LoadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
-		m_textures.LoadResource(Textures::SpearOrc, "src/res/sprites/spearOrc.png");
+		m_images.loadResource(Textures::Icon, "src/res/icon/dragon.png");
+		m_textures.loadResource(Textures::Background, "src/res/sprites/wizardtower.png");
+		m_textures.loadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
+		m_textures.loadResource(Textures::SpearOrc, "src/res/sprites/spearOrc.png");
 
 		// Fonts
-		m_fonts.LoadResource(Fonts::Game, "src/res/fonts/coolstory_regular.ttf");
+		m_fonts.loadResource(Fonts::Game, "src/res/fonts/coolstory_regular.ttf");
 	}
 
 	void Game::initScene()

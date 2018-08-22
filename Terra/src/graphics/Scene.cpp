@@ -20,7 +20,7 @@ namespace px
 	Entity Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
 	{
 		auto entity = m_entities.create();
-		auto sprite = std::make_unique<sf::Sprite>(m_textures.GetResource(texID));
+		auto sprite = std::make_unique<sf::Sprite>(m_textures.getResource(texID));
 		sprite->setPosition(position);
 		entity.assign<Transform>(position);
 		entity.assign<Render>(std::move(sprite), name, layer);
@@ -31,7 +31,7 @@ namespace px
 	{
 		// Change origin?
 		auto entity = m_entities.create();
-		auto text = std::make_unique<sf::Text>(name, m_fonts.GetResource(fontID), fontSize);
+		auto text = std::make_unique<sf::Text>(name, m_fonts.getResource(fontID), fontSize);
 		text->setFillColor(color);
 		text->setPosition(position);
 		entity.assign<Transform>(position);

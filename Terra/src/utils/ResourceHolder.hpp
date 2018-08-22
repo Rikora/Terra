@@ -16,44 +16,44 @@ namespace px
 		class ResourceHolder
 		{
 		public:
-			void LoadResource(Identifier id, const std::string & filename);
+			void loadResource(Identifier id, const std::string & filename);
 			template<typename Parameter>
-			void LoadResource(Identifier id, const std::string & filename, const Parameter & secondParam);
+			void loadResource(Identifier id, const std::string & filename, const Parameter & secondParam);
 
 		public:
-			Resource & GetResource(Identifier id);
-			const Resource & GetResource(Identifier id) const;
+			Resource & getResource(Identifier id);
+			const Resource & getResource(Identifier id) const;
 
 		private:
-			void InsertResource(Identifier id, std::unique_ptr<Resource> & resource);
+			void insertResource(Identifier id, std::unique_ptr<Resource> & resource);
 
 		private:
 			std::map<Identifier, std::unique_ptr<Resource>> m_resourceMap;
 		};
 
 		template<typename Resource, typename Identifier>
-		inline void ResourceHolder<Resource, Identifier>::LoadResource(Identifier id, const std::string & filename)
+		inline void ResourceHolder<Resource, Identifier>::loadResource(Identifier id, const std::string & filename)
 		{
 			auto resource = std::make_unique<Resource>();
 			if (!resource->loadFromFile(filename))
-				throw std::runtime_error("ResourceHolder::LoadResource - Failed to load" + filename);
+				throw std::runtime_error("ResourceHolder::loadResource - Failed to load" + filename);
 
-			InsertResource(id, resource);
+			insertResource(id, resource);
 		}
 
 		template<typename Resource, typename Identifier>
 		template<typename Parameter>
-		inline void ResourceHolder<Resource, Identifier>::LoadResource(Identifier id, const std::string & filename, const Parameter & secondParam)
+		inline void ResourceHolder<Resource, Identifier>::loadResource(Identifier id, const std::string & filename, const Parameter & secondParam)
 		{
 			auto resource = std::make_unique<Resource>();
 			if (!resource->loadFromFile(filename, secondParam))
-				throw std::runtime_error("ResourceHolder::LoadResource - Failed to load" + filename);
+				throw std::runtime_error("ResourceHolder::loadResource - Failed to load" + filename);
 
-			InsertResource(id, resource);
+			insertResource(id, resource);
 		}
 
 		template<typename Resource, typename Identifier>
-		inline Resource & ResourceHolder<Resource, Identifier>::GetResource(Identifier id)
+		inline Resource & ResourceHolder<Resource, Identifier>::getResource(Identifier id)
 		{
 			auto found = m_resourceMap.find(id);
 			assert(found != m_resourceMap.end());
@@ -62,7 +62,7 @@ namespace px
 		}
 
 		template<typename Resource, typename Identifier>
-		inline const Resource & ResourceHolder<Resource, Identifier>::GetResource(Identifier id) const
+		inline const Resource & ResourceHolder<Resource, Identifier>::getResource(Identifier id) const
 		{
 			auto found = m_resourceMap.find(id);
 			assert(found != m_resourceMap.end());
@@ -71,7 +71,7 @@ namespace px
 		}
 
 		template<typename Resource, typename Identifier>
-		inline void ResourceHolder<Resource, Identifier>::InsertResource(Identifier id, std::unique_ptr<Resource> & resource)
+		inline void ResourceHolder<Resource, Identifier>::insertResource(Identifier id, std::unique_ptr<Resource> & resource)
 		{
 			auto inserted = m_resourceMap.insert(std::make_pair(id, std::move(resource)));
 			assert(inserted.second);
