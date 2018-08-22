@@ -18,10 +18,7 @@ namespace px
 	public:
 		void attack(Entity & minion)
 		{
-			if (minion.component<Transform>()->position.x < 500.f)
-				minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (1.f / 60.f);
-			else
-				m_isAttacking = true;
+			minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (1.f / 60.f);
 		}
 
 	public:

@@ -26,6 +26,8 @@ namespace px
 			for (auto m : es.entities_with_components(minion))
 				minion->minion->attack(m);
 
+			// Is it too slow to just look for collision with two pairs at the same time?
+			// Works if one side is just spawning, above must be true
 			if (m_colliders[0] != NULL && m_colliders[1] != NULL)
 			{
 				left_minion = m_colliders[0].component<Minion>();
@@ -35,25 +37,21 @@ namespace px
 				{
 					if (right_minion->minion->isAttacking() || right_minion->minion->isFrontAttacking())
 					{
-						// Halt the minion behind
 						left_minion->minion->setVelocity(0.f);
 						left_entity.component<Animation>()->animations->playAnimation("idle", true);
 						left_minion->minion->setFrontAttacking(true);
 					}
 				};
 
-				//auto attackMinion = [&left_entity, &right_entity, left_minion, right_minion](Entity collider_1, Entity collider_2)
-				//{
-				//	// Why is the attack animation (only first frame?) not triggered?
-				//	// They are not stopping at the same time because of the looping reponse!
-				//	if (left_entity == collider_1 && right_entity == collider_2)
-				//	{
-				//		left_minion->minion->setVelocity(0.f);
-				//		right_minion->minion->setVelocity(0.f);
-				//		left_entity.component<Animation>()->animations->playAnimation("attack", true);
-				//		right_entity.component<Animation>()->animations->playAnimation("attack", true);
-				//	}
-				//};
+				auto attackMinion = [left_minion, right_minion](Entity & left_entity)
+				{
+					if (!left_minion->minion->isAttacking())
+					{
+						left_minion->minion->setVelocity(0.f);
+						left_entity.component<Animation>()->animations->playAnimation("attack", true);
+						left_minion->minion->setAttacking(true);
+					}
+				};
 
 				// Different minion types are situated in opposite directions
 				if ((m_colliders[0].component<Transform>()->position.x < m_colliders[1].component<Transform>()->position.x) &&
@@ -66,18 +64,17 @@ namespace px
 				{
 					haltMinion(m_colliders[0]);
 				}
-				/*else if ((m_colliders[0].component<Transform>()->position.x < m_colliders[1].component<Transform>()->position.x) &&
-					(m_colliders[0].component<Render>()->name == "Player" && m_colliders[1].component<Render>()->name == "Enemy"))
+				else if ((m_colliders[0].component<Transform>()->position.x < m_colliders[1].component<Transform>()->position.x) &&
+						(m_colliders[0].component<Render>()->name == "Player" && m_colliders[1].component<Render>()->name == "Enemy"))
 				{
-					attackMinion(m_colliders[0], m_colliders[1]);
+					attackMinion(m_colliders[0]);
 				}
 				else if ((m_colliders[0].component<Transform>()->position.x > m_colliders[1].component<Transform>()->position.x) &&
-					(m_colliders[0].component<Render>()->name == "Enemy" && m_colliders[1].component<Render>()->name == "Player"))
+						(m_colliders[0].component<Render>()->name == "Enemy" && m_colliders[1].component<Render>()->name == "Player"))
 				{
-					attackMinion(m_colliders[0], m_colliders[1]);
-				}*/
-			}
-					
+					attackMinion(m_colliders[0]);
+				}
+			}			
 		}
 
 		virtual void receive(const utils::Collision & collision) { m_colliders = { collision.left, collision.right }; }
