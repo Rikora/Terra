@@ -1,5 +1,6 @@
 #pragma once
 #include <entityx/Entity.h>
+#include <graphics/components/Render.hpp>
 #include <graphics/components/Transform.hpp>
 #include <graphics/components/Animation.hpp>
 
@@ -17,22 +18,15 @@ namespace px
 	public:
 		void attack(Entity & minion)
 		{
-			// This should be replaced with enemy/player collision notifier code
-			if (minion.component<Transform>()->position.x < 300.f)
+			if (minion.component<Transform>()->position.x < 500.f)
 				minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (1.f / 60.f);
 			else
-			{
-				if (!m_isAttacking)
-				{
-					minion.component<Animation>()->animations->playAnimation("attack", true);
-					m_isAttacking = true;
-					m_velocity = 0.f;
-				}
-			}
+				m_isAttacking = true;
 		}
 
 	public:
 		void setVelocity(const float & velocity) { m_velocity = velocity;  }
+		void setAttacking(const bool & attacking) { m_isAttacking = attacking; }
 		void setFrontAttacking(const bool & frontAttacking) { m_isFrontAttacking = frontAttacking; }
 		void setFrontCollider(const sf::Vector2f & pos) { m_frontCollider = pos + m_offset; }
 

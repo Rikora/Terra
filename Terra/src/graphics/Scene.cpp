@@ -64,8 +64,8 @@ namespace px
 		{
 			auto entity = createEntity(name, texID, ENEMY_BASE_POSITION, 1);
 			entity.assign<Animation>();
-			entity.assign<BoundingBox>(sf::Vector2f(40.f, 54.f), sf::Vector2f(11.f, 10.f));
-			entity.assign<Minion>(-60.f, sf::Vector2f(0.f, 0.f));
+			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(17.f, 11.f));
+			entity.assign<Minion>(-60.f, sf::Vector2f(-10.f, 40.f));
 			auto anim = entity.component<Animation>();
 
 			if (texID == Textures::SpearOrc)

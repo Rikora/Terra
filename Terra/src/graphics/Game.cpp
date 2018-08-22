@@ -52,7 +52,10 @@ namespace px
 			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+			{
 				m_scene->createMinion("Player", Textures::Monk);
+				//m_scene->createMinion("Enemy", Textures::SpearOrc);
+			}
 		}
 	}
 
