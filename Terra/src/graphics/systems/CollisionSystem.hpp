@@ -21,7 +21,7 @@ namespace px
 			ComponentHandle<Minion> minion, left_minion, right_minion;
 
 			for (auto m : es.entities_with_components(minion))
-				minion->minion->attack(m);
+				minion->minion->attack(m, dt);
 
 			for (auto left_entity : es.entities_with_components(left_minion))
 			{

@@ -11,14 +11,14 @@ namespace px
 	class MinionScript
 	{
 	public:
-		MinionScript(const float & velocity, const sf::Vector2f & offset) : m_isAttacking(false), m_isFrontAttacking(false), 
-					 m_velocity(velocity), m_offset(offset) {};
+		MinionScript(const float & velocity, const sf::Vector2f & offset, const uint & health) : m_isAttacking(false), m_isFrontAttacking(false), 
+					 m_velocity(velocity), m_offset(offset), m_health(health) {};
 		~MinionScript() = default;
 
 	public:
-		void attack(Entity & minion)
+		void attack(Entity & minion, double dt)
 		{
-			minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (1.f / 60.f);
+			minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (float)dt;
 		}
 
 	public:
@@ -26,13 +26,16 @@ namespace px
 		void setAttacking(const bool & attacking) { m_isAttacking = attacking; }
 		void setFrontAttacking(const bool & frontAttacking) { m_isFrontAttacking = frontAttacking; }
 		void setFrontCollider(const sf::Vector2f & pos) { m_frontCollider = pos + m_offset; }
+		void setHealth(const uint & health) { m_health = health; }
 
 	public:
 		bool isAttacking() const { return m_isAttacking; }
 		bool isFrontAttacking() const { return m_isFrontAttacking; }
 		sf::Vector2f getFrontCollider() const { return m_frontCollider; }
+		uint getHealth() const { return m_health; }
 
 	private:
+		uint m_health;
 		float m_velocity;
 		bool m_isAttacking;
 		bool m_isFrontAttacking;
@@ -42,7 +45,8 @@ namespace px
 
 	struct Minion
 	{
-		Minion(const float & velocity, const sf::Vector2f & offset) : minion(std::make_unique<MinionScript>(velocity, offset)) {}
+		Minion(const float & velocity, const sf::Vector2f & offset, const uint & health) : 
+				minion(std::make_unique<MinionScript>(velocity, offset, health)) {}
 
 		std::unique_ptr<MinionScript> minion;
 	};
