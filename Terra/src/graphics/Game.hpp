@@ -36,6 +36,7 @@ namespace px
 		FontHolder m_fonts;
 		Entity m_goldText;
 		utils::GameManager m_gameManager;
+		bool m_drawDebugData;
 
 	private:
 		std::unique_ptr<Scene> m_scene;

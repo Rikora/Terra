@@ -10,7 +10,7 @@ namespace px
 	double timestep = 1.0 / 60.0;
 
 	Game::Game() : m_window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Terra", sf::Style::Close,
-							sf::ContextSettings(0U, 0U, 8U))
+							sf::ContextSettings(0U, 0U, 8U)), m_drawDebugData(true)
 	{
 		m_window.setVerticalSyncEnabled(true);
 		loadResources();
@@ -38,7 +38,7 @@ namespace px
 
 	void Game::initScene()
 	{
-		m_scene = std::make_unique<Scene>(m_window, m_textures, m_fonts, m_gameManager);
+		m_scene = std::make_unique<Scene>(m_window, m_textures, m_fonts, m_gameManager, m_drawDebugData);
 		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
 		m_goldText = m_scene->createText("Gold: " + std::to_string(m_gameManager.playerGold), Fonts::Game, 22, sf::Vector2f(30.f, 35.f), sf::Color::Yellow);
 		m_goldText.component<Text>()->text->setOutlineThickness(2.f);
@@ -51,6 +51,8 @@ namespace px
 		{
 			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
 				m_window.close();
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::U)
+				m_drawDebugData = !m_drawDebugData;
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				m_scene->createMinion("Player", Textures::Monk);

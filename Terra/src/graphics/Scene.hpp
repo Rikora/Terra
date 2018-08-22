@@ -22,7 +22,8 @@ namespace px
 	class Scene : public EntityX
 	{
 	public:
-		explicit Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts, utils::GameManager & gameManager);
+		explicit Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts, utils::GameManager & gameManager,
+					   bool & drawDebugData);
 		~Scene() = default;
 
 	public:
@@ -37,7 +38,7 @@ namespace px
 		Entity getEntity(const std::string & name);
 
 	private:
-		void initSystems(sf::RenderTarget & target);
+		void initSystems(sf::RenderTarget & target, bool & drawDebugData);
 
 	private:
 		EntityManager m_entities;

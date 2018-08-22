@@ -26,7 +26,8 @@ namespace px
 	class RenderSystem : public System<RenderSystem>
 	{
 	public:
-		explicit RenderSystem(sf::RenderTarget & target, std::vector<uint> & layers) : m_target(target), m_layers(layers) {}
+		explicit RenderSystem(sf::RenderTarget & target, std::vector<uint> & layers, bool & drawDebugData) : m_target(target), m_layers(layers),
+						      m_drawDebugData(drawDebugData) {}
 
 	public:
 		virtual void update(EntityManager &es, EventManager &events, TimeDelta dt) override
@@ -42,16 +43,19 @@ namespace px
 					{
 						m_target.draw(*render->sprite.get());
 
-						if (entity.has_component<BoundingBox>())
+						if (m_drawDebugData)
 						{
-							auto box = entity.component<BoundingBox>();
-							m_target.draw(drawRect(box->boundingBox));
-						}
+							if (entity.has_component<BoundingBox>())
+							{
+								auto box = entity.component<BoundingBox>();
+								m_target.draw(drawRect(box->boundingBox));
+							}
 
-						if (entity.has_component<Minion>())
-						{
-							auto minion = entity.component<Minion>();
-							m_target.draw(drawCircle(minion->minion->getFrontCollider()));
+							if (entity.has_component<Minion>())
+							{
+								auto minion = entity.component<Minion>();
+								m_target.draw(drawCircle(minion->minion->getFrontCollider()));
+							}
 						}
 					}
 				}
@@ -79,7 +83,7 @@ namespace px
 			shape.setPosition(position);
 			shape.setRadius(3.f);
 			shape.setFillColor(sf::Color::Transparent);
-			shape.setOutlineColor(sf::Color::Green);
+			shape.setOutlineColor(sf::Color::Magenta);
 			shape.setOutlineThickness(1.f);
 			return shape;
 		}
@@ -87,5 +91,6 @@ namespace px
 	private:
 		sf::RenderTarget & m_target;
 		std::vector<uint> & m_layers;
+		bool & m_drawDebugData;
 	};
 }

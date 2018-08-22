@@ -10,11 +10,11 @@
 
 namespace px
 {
-	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts, utils::GameManager & gameManager) : m_entities(m_events),
+	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts, utils::GameManager & gameManager, bool & drawDebugData) : m_entities(m_events),
 				 m_systems(m_entities, m_events), m_textures(textures), m_fonts(fonts), m_gameManager(gameManager)
 	{
 		m_layers = { 0, 1 };
-		initSystems(target);
+		initSystems(target, drawDebugData);
 	}
 
 	Entity Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
@@ -47,7 +47,7 @@ namespace px
 			auto entity = createEntity(name, texID, PLAYER_BASE_POSITION, 1);
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(15.f, 11.f));
-			entity.assign<Minion>(60.f, sf::Vector2f(60.f, 40.f));
+			entity.assign<Minion>(60.f, sf::Vector2f(56.f, 40.f));
 			auto anim = entity.component<Animation>();
 
 			if (texID == Textures::Monk)
@@ -109,9 +109,9 @@ namespace px
 		return found;
 	}
 
-	void Scene::initSystems(sf::RenderTarget & target)
+	void Scene::initSystems(sf::RenderTarget & target, bool & drawDebugData)
 	{
-		m_systems.add<RenderSystem>(target, m_layers);
+		m_systems.add<RenderSystem>(target, m_layers, drawDebugData);
 		m_systems.add<TransformSystem>();
 		m_systems.add<AnimationSystem>();
 		m_systems.add<CollisionSystem>();
