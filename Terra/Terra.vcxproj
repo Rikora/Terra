@@ -155,11 +155,9 @@
     <ClInclude Include="src\graphics\Scene.hpp" />
     <ClInclude Include="src\graphics\systems\AnimationSystem.hpp" />
     <ClInclude Include="src\graphics\systems\CollisionSystem.hpp" />
-    <ClInclude Include="src\graphics\systems\MinionSystem.hpp" />
     <ClInclude Include="src\graphics\systems\RenderSystem.hpp" />
     <ClInclude Include="src\graphics\systems\TransformSystem.hpp" />
     <ClInclude Include="src\utils\AnimationHelper.hpp" />
-    <ClInclude Include="src\utils\Collision.hpp" />
     <ClInclude Include="src\utils\GameManager.hpp" />
     <ClInclude Include="src\utils\Helper.hpp" />
     <ClInclude Include="src\utils\ResourceHolder.hpp" />

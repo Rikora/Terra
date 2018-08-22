@@ -6,7 +6,6 @@
 #include <graphics/systems/AnimationSystem.hpp>
 #include <graphics/systems/TransformSystem.hpp>
 #include <graphics/systems/CollisionSystem.hpp>
-#include <graphics/systems/MinionSystem.hpp>
 #include <utils/GameManager.hpp>
 
 namespace px
@@ -65,7 +64,7 @@ namespace px
 			auto entity = createEntity(name, texID, ENEMY_BASE_POSITION, 1);
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(17.f, 11.f));
-			entity.assign<Minion>(-60.f, sf::Vector2f(-10.f, 40.f));
+			entity.assign<Minion>(-60.f, sf::Vector2f(0.f, 40.f));
 			auto anim = entity.component<Animation>();
 
 			if (texID == Textures::SpearOrc)
@@ -93,7 +92,6 @@ namespace px
 
 	void Scene::updateTransformSystems(TimeDelta dt)
 	{
-		m_systems.update<MinionSystem>(dt);
 		m_systems.update<TransformSystem>(dt);
 		m_systems.update<AnimationSystem>(dt);
 		m_systems.update<CollisionSystem>(dt);
@@ -117,7 +115,6 @@ namespace px
 		m_systems.add<TransformSystem>();
 		m_systems.add<AnimationSystem>();
 		m_systems.add<CollisionSystem>();
-		m_systems.add<MinionSystem>();
 		m_systems.configure();
 	}
 }
