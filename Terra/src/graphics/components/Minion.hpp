@@ -13,10 +13,11 @@ namespace px
 	{
 	public:
 		MinionScript(const float & velocity, const sf::Vector2f & offset, const uint & health) : m_isAttacking(false), m_isFrontAttacking(false), 
-					 m_velocity(velocity), m_offset(offset), m_health(health) {};
+					 m_velocity(velocity), m_tmpVelocity(velocity), m_offset(offset), m_health(health) {};
 		~MinionScript() = default;
 
 	public:
+		void resetVelocity() { m_velocity = m_tmpVelocity; }
 		void update(Entity & minion, double dt)
 		{	
 			minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (float)dt;
@@ -47,6 +48,7 @@ namespace px
 		//uint m_damage;
 		uint m_health;
 		float m_velocity;
+		float m_tmpVelocity;
 		bool m_isAttacking;
 		bool m_isFrontAttacking;
 		sf::Vector2f m_frontCollider;

@@ -25,11 +25,11 @@ namespace px
 				// Deal damage at the correct frame
 				if (minion->minion->isAttacking())
 				{
-					if (m.component<Render>()->name == "Player")
+					if (minion->minion->getTarget())
 					{
-						if (minion->minion->m_damageWatch.isRunning() && minion->minion->m_damageWatch.getElapsedTime().asSeconds() >= 0.65f)
+						if (m.component<Render>()->name == "Player")
 						{
-							if (minion->minion->getTarget())
+							if (minion->minion->m_damageWatch.isRunning() && minion->minion->m_damageWatch.getElapsedTime().asSeconds() >= 0.65f)
 							{
 								auto target = minion->minion->getTarget().component<Minion>();
 								target->minion->setHealth(target->minion->getHealth() - 1);
@@ -37,6 +37,14 @@ namespace px
 								minion->minion->m_damageWatch.restart();
 							}
 						}
+					}
+					else
+					{
+						minion->minion->m_damageWatch.reset();
+						minion->minion->resetVelocity();
+						m.component<Animation>()->animations->playAnimation("walk", true);
+						minion->minion->setAttacking(false);
+						minion->minion->setFrontAttacking(false);
 					}
 				}
 
@@ -58,6 +66,12 @@ namespace px
 								left_minion->minion->setVelocity(0.f);
 								left_entity.component<Animation>()->animations->playAnimation("idle", true);
 								left_minion->minion->setFrontAttacking(true);
+							}
+							else
+							{
+								left_minion->minion->resetVelocity();
+								left_entity.component<Animation>()->animations->playAnimation("walk", true); // This is not playing
+								left_minion->minion->setFrontAttacking(false);
 							}
 						};
 
