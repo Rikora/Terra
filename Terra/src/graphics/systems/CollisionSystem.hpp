@@ -27,26 +27,20 @@ namespace px
 				{
 					if (minion->minion->getTarget())
 					{
+						auto dealDamage = [minion](const float & attackFrame)
+						{
+							if (minion->minion->m_damageWatch.isRunning() && minion->minion->m_damageWatch.getElapsedTime().asSeconds() >= attackFrame)
+							{
+								auto target = minion->minion->getTarget().component<Minion>();
+								target->minion->setHealth(target->minion->getHealth() - minion->minion->getDamage());
+								minion->minion->m_damageWatch.restart();
+							}
+						};
+
 						if (m.component<Render>()->name == "Player")
-						{
-							if (minion->minion->m_damageWatch.isRunning() && minion->minion->m_damageWatch.getElapsedTime().asSeconds() >= 0.65f)
-							{
-								auto target = minion->minion->getTarget().component<Minion>();
-								target->minion->setHealth(target->minion->getHealth() - minion->minion->getDamage());
-								std::cout << "Enemy: " << target->minion->getHealth() << std::endl;
-								minion->minion->m_damageWatch.restart();
-							}
-						}
+							dealDamage(0.65f);
 						else if (m.component<Render>()->name == "Enemy")
-						{
-							if (minion->minion->m_damageWatch.isRunning() && minion->minion->m_damageWatch.getElapsedTime().asSeconds() >= 0.65f)
-							{
-								auto target = minion->minion->getTarget().component<Minion>();
-								target->minion->setHealth(target->minion->getHealth() - minion->minion->getDamage());
-								std::cout << "Player: " << target->minion->getHealth() << std::endl;
-								minion->minion->m_damageWatch.restart();
-							}
-						}
+							dealDamage(0.65f);
 					}
 					else
 					{
