@@ -7,7 +7,7 @@
 
 namespace px
 {
-	double timestep = 1.0 / 60.0;
+	const double timestep = 1.0 / 60.0;
 
 	Game::Game() : m_window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Terra", sf::Style::Close,
 							sf::ContextSettings(0U, 0U, 8U)), m_drawDebugData(true)
@@ -64,7 +64,7 @@ namespace px
 	void Game::update(double dt)
 	{
 		m_goldText.component<Text>()->text->setString("Gold: " + std::to_string(m_gameManager.playerGold));
-		m_scene->updateTransformSystems(timestep);
+		m_scene->updateTransformSystems(dt);
 	}
 
 	void Game::render()

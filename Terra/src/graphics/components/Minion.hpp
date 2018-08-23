@@ -1,5 +1,6 @@
 #pragma once
 #include <entityx/Entity.h>
+#include <Thor/Time/StopWatch.hpp>
 #include <graphics/components/Render.hpp>
 #include <graphics/components/Transform.hpp>
 #include <graphics/components/Animation.hpp>
@@ -16,9 +17,12 @@ namespace px
 		~MinionScript() = default;
 
 	public:
-		void attack(Entity & minion, double dt)
-		{
+		void update(Entity & minion, double dt)
+		{	
 			minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (float)dt;
+
+			if (m_health <= 0)
+				minion.destroy();
 		}
 
 	public:
@@ -27,20 +31,27 @@ namespace px
 		void setFrontAttacking(const bool & frontAttacking) { m_isFrontAttacking = frontAttacking; }
 		void setFrontCollider(const sf::Vector2f & pos) { m_frontCollider = pos + m_offset; }
 		void setHealth(const uint & health) { m_health = health; }
+		void setTarget(Entity & target) { m_target = target; }
 
 	public:
 		bool isAttacking() const { return m_isAttacking; }
 		bool isFrontAttacking() const { return m_isFrontAttacking; }
 		sf::Vector2f getFrontCollider() const { return m_frontCollider; }
 		uint getHealth() const { return m_health; }
+		Entity getTarget() { return m_target; }
+
+	public:
+		thor::StopWatch m_damageWatch;
 
 	private:
+		//uint m_damage;
 		uint m_health;
 		float m_velocity;
 		bool m_isAttacking;
 		bool m_isFrontAttacking;
 		sf::Vector2f m_frontCollider;
 		sf::Vector2f m_offset;
+		Entity m_target;
 	};
 
 	struct Minion

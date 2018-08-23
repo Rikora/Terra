@@ -21,7 +21,27 @@ namespace px
 			ComponentHandle<Minion> minion, left_minion, right_minion;
 
 			for (auto m : es.entities_with_components(minion))
-				minion->minion->attack(m, dt);
+			{
+				// Deal damage at the correct frame
+				if (minion->minion->isAttacking())
+				{
+					if (m.component<Render>()->name == "Player")
+					{
+						if (minion->minion->m_damageWatch.isRunning() && minion->minion->m_damageWatch.getElapsedTime().asSeconds() >= 0.65f)
+						{
+							if (minion->minion->getTarget())
+							{
+								auto target = minion->minion->getTarget().component<Minion>();
+								target->minion->setHealth(target->minion->getHealth() - 1);
+								std::cout << target->minion->getHealth() << std::endl;
+								minion->minion->m_damageWatch.restart();
+							}
+						}
+					}
+				}
+
+				minion->minion->update(m, dt);
+			}
 
 			for (auto left_entity : es.entities_with_components(left_minion))
 			{
@@ -41,13 +61,15 @@ namespace px
 							}
 						};
 
-						auto attackMinion = [left_minion, right_minion](Entity & left_entity)
+						auto attackMinion = [left_minion, right_minion](Entity & left_entity, Entity & right_entity)
 						{
 							if (!left_minion->minion->isAttacking())
 							{
 								left_minion->minion->setVelocity(0.f);
 								left_entity.component<Animation>()->animations->playAnimation("attack", true);
+								left_minion->minion->setTarget(right_entity);
 								left_minion->minion->setAttacking(true);
+								left_minion->minion->m_damageWatch.start();
 							}
 						};
 
@@ -65,12 +87,12 @@ namespace px
 						else if ((left_entity.component<Transform>()->position.x < right_entity.component<Transform>()->position.x) &&
 								(left_entity.component<Render>()->name == "Player" && right_entity.component<Render>()->name == "Enemy"))
 						{
-							attackMinion(left_entity);
+							attackMinion(left_entity, right_entity);
 						}
 						else if ((left_entity.component<Transform>()->position.x > right_entity.component<Transform>()->position.x) &&
 								(left_entity.component<Render>()->name == "Enemy" && right_entity.component<Render>()->name == "Player"))
 						{
-							attackMinion(left_entity);
+							attackMinion(left_entity, right_entity);
 						}
 					}
 				}
