@@ -22,6 +22,9 @@ namespace px
 		{	
 			minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (float)dt;
 
+			if (m_target == NULL)
+				resetVelocity();
+
 			if (m_health <= 0)
 				minion.destroy();
 		}

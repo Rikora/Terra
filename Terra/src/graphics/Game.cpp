@@ -8,7 +8,6 @@
 namespace px
 {
 	const double timestep = 1.0 / 60.0;
-	int i = 0;
 
 	Game::Game() : m_window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Terra", sf::Style::Close,
 							sf::ContextSettings(0U, 0U, 8U)), m_drawDebugData(true)
@@ -57,11 +56,7 @@ namespace px
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				m_scene->createMinion("Player", Textures::Monk);
-
-				if(i == 0)
-					m_scene->createMinion("Enemy", Textures::SpearOrc);
-
-				i++;
+				m_scene->createMinion("Enemy", Textures::SpearOrc);
 			}
 		}
 	}

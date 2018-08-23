@@ -63,14 +63,14 @@ namespace px
 						{
 							if (right_minion->minion->isAttacking() || right_minion->minion->isFrontAttacking())
 							{
+								// Minion goes back to idle (first frame) by default? Makes no sence but this works for the moment...
 								left_minion->minion->setVelocity(0.f);
-								left_entity.component<Animation>()->animations->playAnimation("idle", true);
+								left_entity.component<Animation>()->animations->playAnimation("walk", true);
 								left_minion->minion->setFrontAttacking(true);
 							}
 							else
 							{
 								left_minion->minion->resetVelocity();
-								left_entity.component<Animation>()->animations->playAnimation("walk", true); // This is not playing
 								left_minion->minion->setFrontAttacking(false);
 							}
 						};
