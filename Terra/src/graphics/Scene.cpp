@@ -13,7 +13,7 @@ namespace px
 	Scene::Scene(sf::RenderTarget & target, TextureHolder & textures, FontHolder & fonts, utils::GameManager & gameManager, bool & drawDebugData) : m_entities(m_events),
 				 m_systems(m_entities, m_events), m_textures(textures), m_fonts(fonts), m_gameManager(gameManager)
 	{
-		m_layers = { 0, 1 };
+		m_layers = { 0, 1, 2 };
 		initSystems(target, drawDebugData);
 	}
 

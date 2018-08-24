@@ -29,7 +29,8 @@ namespace px
 		// Textures
 		m_images.loadResource(Textures::Icon, "src/res/icon/dragon.png");
 		m_textures.loadResource(Textures::Background, "src/res/sprites/wizardtower.png");
-		m_textures.loadResource(Textures::Healthbar, "src/res/sprites/health_bar.png");
+		m_textures.loadResource(Textures::Healthbar, "src/res/sprites/test.png");
+		m_textures.loadResource(Textures::HealthbarBackground, "src/res/sprites/red.png");
 		m_textures.loadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
 		m_textures.loadResource(Textures::SpearOrc, "src/res/sprites/spearOrc.png");
 
@@ -46,7 +47,8 @@ namespace px
 
 		// Test code
 		m_scene->createMinion("Player", Textures::Monk);
-		m_scene->createEntity("Healthbar", Textures::Healthbar, sf::Vector2f(208.f, 621.f), sf::Vector2f(0.7f, 0.8f), 1);
+		m_scene->createEntity("HealthbarBackground", Textures::HealthbarBackground, sf::Vector2f(212.f, 617.f), sf::Vector2f(0.2f, 0.3f), 1);
+		m_healthbar = m_scene->createEntity("Healthbar", Textures::Healthbar, sf::Vector2f(212.f, 617.f), sf::Vector2f(0.2f, 0.3f), 2);
 	}
 
 	void Game::pollEvents()
@@ -58,6 +60,10 @@ namespace px
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::U)
 				m_drawDebugData = !m_drawDebugData;
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F)
+				m_healthbar.component<Transform>()->scale.x -= 0.01f;
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::G)
+				m_healthbar.component<Transform>()->scale.x += 0.01f;
 			/*if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				m_scene->createMinion("Player", Textures::Monk);
