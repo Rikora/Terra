@@ -27,7 +27,8 @@ namespace px
 		~Scene() = default;
 
 	public:
-		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer = 0);
+		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, 
+							const sf::Vector2f & scale = sf::Vector2f(1.f, 1.f), const uint & layer = 0);
 		Entity createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position, const sf::Color & color = sf::Color::White);
 		void createMinion(const std::string & name, Textures::ID texID);
 		void destroyEntities();

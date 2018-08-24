@@ -10,7 +10,7 @@ namespace px
 	const double timestep = 1.0 / 60.0;
 
 	Game::Game() : m_window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Terra", sf::Style::Close,
-							sf::ContextSettings(0U, 0U, 8U)), m_drawDebugData(true)
+							sf::ContextSettings(0U, 0U, 8U)), m_drawDebugData(false)
 	{
 		m_window.setVerticalSyncEnabled(true);
 		loadResources();
@@ -29,6 +29,7 @@ namespace px
 		// Textures
 		m_images.loadResource(Textures::Icon, "src/res/icon/dragon.png");
 		m_textures.loadResource(Textures::Background, "src/res/sprites/wizardtower.png");
+		m_textures.loadResource(Textures::Healthbar, "src/res/sprites/health_bar.png");
 		m_textures.loadResource(Textures::Monk, "src/res/sprites/playerMonk.png");
 		m_textures.loadResource(Textures::SpearOrc, "src/res/sprites/spearOrc.png");
 
@@ -39,9 +40,13 @@ namespace px
 	void Game::initScene()
 	{
 		m_scene = std::make_unique<Scene>(m_window, m_textures, m_fonts, m_gameManager, m_drawDebugData);
-		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f), 0);
+		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f));
 		m_goldText = m_scene->createText("Gold: " + std::to_string(m_gameManager.playerGold), Fonts::Game, 22, sf::Vector2f(30.f, 35.f), sf::Color::Yellow);
 		m_goldText.component<Text>()->text->setOutlineThickness(2.f);
+
+		// Test code
+		m_scene->createMinion("Player", Textures::Monk);
+		m_scene->createEntity("Healthbar", Textures::Healthbar, sf::Vector2f(208.f, 621.f), sf::Vector2f(0.7f, 0.8f), 1);
 	}
 
 	void Game::pollEvents()
@@ -53,11 +58,11 @@ namespace px
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::U)
 				m_drawDebugData = !m_drawDebugData;
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+			/*if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				m_scene->createMinion("Player", Textures::Monk);
 				m_scene->createMinion("Enemy", Textures::SpearOrc);
-			}
+			}*/
 		}
 	}
 

@@ -12,6 +12,7 @@ namespace Textures
 	{
 		Icon,
 		Background,
+		Healthbar,
 		Monk,
 		SpearOrc
 	};

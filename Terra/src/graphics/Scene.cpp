@@ -17,24 +17,25 @@ namespace px
 		initSystems(target, drawDebugData);
 	}
 
-	Entity Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, const uint & layer)
+	Entity Scene::createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, 
+							   const sf::Vector2f & scale, const uint & layer)
 	{
 		auto entity = m_entities.create();
 		auto sprite = std::make_unique<sf::Sprite>(m_textures.getResource(texID));
+		sprite->setScale(scale);
 		sprite->setPosition(position);
-		entity.assign<Transform>(position);
+		entity.assign<Transform>(position, scale);
 		entity.assign<Render>(std::move(sprite), name, layer);
 		return entity;
 	}
 
 	Entity Scene::createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position, const sf::Color & color)
 	{
-		// Change origin?
 		auto entity = m_entities.create();
 		auto text = std::make_unique<sf::Text>(name, m_fonts.getResource(fontID), fontSize);
 		text->setFillColor(color);
 		text->setPosition(position);
-		entity.assign<Transform>(position);
+		entity.assign<Transform>(position, sf::Vector2f(1.f, 1.f));
 		entity.assign<Text>(std::move(text));
 		return entity;
 	}
@@ -44,7 +45,7 @@ namespace px
 		// Better to store data in a json file instead?
 		if (name == "Player")
 		{
-			auto entity = createEntity(name, texID, PLAYER_BASE_POSITION, 1);
+			auto entity = createEntity(name, texID, PLAYER_BASE_POSITION, sf::Vector2f(1.f, 1.f), 1);
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(15.f, 11.f)); //
 			entity.assign<Minion>(60.f, sf::Vector2f(56.f, 40.f), 1, 10); // Different...
@@ -61,7 +62,7 @@ namespace px
 		}
 		else if (name == "Enemy")
 		{
-			auto entity = createEntity(name, texID, ENEMY_BASE_POSITION, 1);
+			auto entity = createEntity(name, texID, ENEMY_BASE_POSITION, sf::Vector2f(1.f, 1.f), 1);
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(17.f, 11.f)); //
 			entity.assign<Minion>(-60.f, sf::Vector2f(0.f, 40.f), 2, 5); // Different...
@@ -94,7 +95,7 @@ namespace px
 	{
 		m_systems.update<TransformSystem>(dt);
 		m_systems.update<AnimationSystem>(dt);
-		m_systems.update<CollisionSystem>(dt);
+		//m_systems.update<CollisionSystem>(dt);
 	}
 
 	Entity Scene::getEntity(const std::string & name)

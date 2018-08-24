@@ -7,11 +7,10 @@
 
 namespace px
 {
-	// We are not interested in rotation and scale for now
 	struct Transform
 	{
-		explicit Transform(const sf::Vector2f & position) : position(position) {}
+		explicit Transform(const sf::Vector2f & position, const sf::Vector2f & scale) : position(position), scale(scale) {}
 
-		sf::Vector2f position;
+		sf::Vector2f position, scale;
 	};
 }

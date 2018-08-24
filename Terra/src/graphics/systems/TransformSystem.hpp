@@ -26,6 +26,7 @@ namespace px
 
 			for (auto entity : es.entities_with_components(render, trans))
 			{
+				render->sprite->setScale(trans->scale);
 				render->sprite->setPosition(trans->position);
 
 				// Set the position of the bounding box
