@@ -46,7 +46,7 @@ namespace px
 		m_goldText.component<Text>()->text->setOutlineThickness(2.f);
 
 		// Test code
-		//m_scene->createMinion("Enemy", Textures::SpearOrc);
+		//m_scene->createMinion("Player", Textures::Monk);
 	}
 
 	void Game::pollEvents()
@@ -58,11 +58,11 @@ namespace px
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::U)
 				m_drawDebugData = !m_drawDebugData;
-			/*if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				m_scene->createMinion("Player", Textures::Monk);
 				m_scene->createMinion("Enemy", Textures::SpearOrc);
-			}*/
+			}
 		}
 	}
 

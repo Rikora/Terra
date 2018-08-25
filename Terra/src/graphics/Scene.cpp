@@ -48,11 +48,11 @@ namespace px
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(15.f, 11.f));
 			entity.assign<Minion>(60.f, sf::Vector2f(56.f, 40.f), 1, 10);
-			entity.assign<Healthbar>(createEntity("Background", Textures::HealthbarBackground, PLAYER_BASE_POSITION + sf::Vector2f(12.f, -3.f), 
-									 sf::Vector2f(0.2f, 0.3f), 1),
-									 createEntity("Healthbar", Textures::Healthbar, PLAYER_BASE_POSITION + sf::Vector2f(13.f, -1.f), 
-								     sf::Vector2f(0.19f, 0.2f), 2),
-									 sf::Vector2f(12.f, -3.f), sf::Vector2f(13.f, -1.f));
+			entity.assign<Healthbar>(createEntity("Background", Textures::HealthbarBackground, PLAYER_BASE_POSITION + sf::Vector2f(16.f, -3.f), 
+									 sf::Vector2f(0.15f, 0.25f), 1),
+									 createEntity("Healthbar", Textures::Healthbar, PLAYER_BASE_POSITION + sf::Vector2f(17.f, -1.f), 
+								     sf::Vector2f(0.14f, 0.15f), 2),
+									 sf::Vector2f(16.f, -3.f), sf::Vector2f(17.f, -1.f));
 
 			auto anim = entity.component<Animation>();
 
@@ -71,11 +71,11 @@ namespace px
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(17.f, 11.f));
 			entity.assign<Minion>(-60.f, sf::Vector2f(0.f, 40.f), 2, 5);
-			entity.assign<Healthbar>(createEntity("Background", Textures::HealthbarBackground, ENEMY_BASE_POSITION + sf::Vector2f(12.f, -3.f), 
-									 sf::Vector2f(0.2f, 0.3f), 1),
-									 createEntity("Healthbar", Textures::Healthbar, ENEMY_BASE_POSITION + sf::Vector2f(13.f, -1.f), 
-								     sf::Vector2f(0.19f, 0.2f), 2),
-									 sf::Vector2f(12.f, -3.f), sf::Vector2f(13.f, -1.f));
+			entity.assign<Healthbar>(createEntity("Background", Textures::HealthbarBackground, ENEMY_BASE_POSITION + sf::Vector2f(16.f, -3.f), 
+									 sf::Vector2f(0.15f, 0.25f), 1),
+									 createEntity("Healthbar", Textures::Healthbar, ENEMY_BASE_POSITION + sf::Vector2f(17.f, -1.f), 
+								     sf::Vector2f(0.14f, 0.15f), 2),
+									 sf::Vector2f(16.f, -3.f), sf::Vector2f(17.f, -1.f));
 			auto anim = entity.component<Animation>();
 
 			if (texID == Textures::SpearOrc)
