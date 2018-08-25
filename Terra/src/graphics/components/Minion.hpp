@@ -14,7 +14,7 @@ namespace px
 	{
 	public:
 		MinionScript(const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : m_isAttacking(false), m_isFrontAttacking(false), 
-					 m_velocity(velocity), m_tmpVelocity(velocity), m_offset(offset), m_damage(damage), m_health(health) {};
+					 m_velocity(velocity), m_tmpVelocity(velocity), m_offset(offset), m_damage(damage), m_health(health), m_maxHealth(health) {};
 		~MinionScript() = default;
 
 	public:
@@ -50,6 +50,7 @@ namespace px
 		sf::Vector2f getFrontCollider() const { return m_frontCollider; }
 		uint getDamage() const { return m_damage; }
 		uint getHealth() const { return m_health; }
+		uint getMaxHealth() const { return m_maxHealth; }
 		Entity getTarget() { return m_target; }
 
 	public:
@@ -58,6 +59,7 @@ namespace px
 	private:
 		uint m_damage;
 		uint m_health;
+		uint m_maxHealth;
 		float m_velocity;
 		float m_tmpVelocity;
 		bool m_isAttacking;

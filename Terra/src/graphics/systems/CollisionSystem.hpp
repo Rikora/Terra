@@ -29,10 +29,14 @@ namespace px
 					{
 						auto dealDamage = [minion](const float & attackFrame)
 						{
+							// Reduce health of target minion and display result as the health bar
 							if (minion->minion->m_damageWatch.isRunning() && minion->minion->m_damageWatch.getElapsedTime().asSeconds() >= attackFrame)
 							{
 								auto target = minion->minion->getTarget().component<Minion>();
+								auto healthbar = minion->minion->getTarget().component<Healthbar>();
 								target->minion->setHealth(target->minion->getHealth() - minion->minion->getDamage());
+								healthbar->bar.component<Transform>()->scale.x = ((float)target->minion->getHealth() / (float)target->minion->getMaxHealth()) * 
+																			     healthbar->healthScaleX;
 								minion->minion->m_damageWatch.restart();
 							}
 						};

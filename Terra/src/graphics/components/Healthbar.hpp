@@ -12,10 +12,12 @@ namespace px
 {
 	struct Healthbar
 	{
-		explicit Healthbar(Entity background, Entity bar, const sf::Vector2f & backgroundOffset, const sf::Vector2f & barOffset) : 
-						   background(background), bar(bar), backgroundOffset(backgroundOffset), barOffset(barOffset) {}
+		explicit Healthbar(Entity background, Entity bar, const sf::Vector2f & backgroundOffset, const sf::Vector2f & barOffset,
+						   const float & healthScaleX) : background(background), bar(bar), backgroundOffset(backgroundOffset), 
+						   barOffset(barOffset), healthScaleX(healthScaleX) {}
 
 		Entity background, bar;
 		sf::Vector2f backgroundOffset, barOffset;
+		float healthScaleX;
 	};
 }
