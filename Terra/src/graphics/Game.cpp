@@ -46,9 +46,7 @@ namespace px
 		m_goldText.component<Text>()->text->setOutlineThickness(2.f);
 
 		// Test code
-		m_scene->createMinion("Player", Textures::Monk);
-		m_scene->createEntity("HealthbarBackground", Textures::HealthbarBackground, sf::Vector2f(212.f, 617.f), sf::Vector2f(0.2f, 0.3f), 1);
-		m_healthbar = m_scene->createEntity("Healthbar", Textures::Healthbar, sf::Vector2f(213.f, 619.f), sf::Vector2f(0.19f, 0.2f), 2);
+		//m_scene->createMinion("Enemy", Textures::SpearOrc);
 	}
 
 	void Game::pollEvents()
@@ -60,10 +58,6 @@ namespace px
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::U)
 				m_drawDebugData = !m_drawDebugData;
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F)
-				m_healthbar.component<Transform>()->scale.x -= 0.01f;
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::G)
-				m_healthbar.component<Transform>()->scale.x += 0.01f;
 			/*if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				m_scene->createMinion("Player", Textures::Monk);

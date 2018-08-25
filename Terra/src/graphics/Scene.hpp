@@ -10,6 +10,7 @@
 #include <graphics/components/Transform.hpp>
 #include <graphics/components/Minion.hpp>
 #include <graphics/components/Text.hpp>
+#include <graphics/components/Healthbar.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
 

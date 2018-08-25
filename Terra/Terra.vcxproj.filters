@@ -64,6 +64,9 @@
     <ClInclude Include="src\graphics\components\Minion.hpp">
       <Filter>Source\Graphics\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\components\Healthbar.hpp">
+      <Filter>Source\Graphics\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

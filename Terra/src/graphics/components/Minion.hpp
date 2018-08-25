@@ -4,6 +4,7 @@
 #include <graphics/components/Render.hpp>
 #include <graphics/components/Transform.hpp>
 #include <graphics/components/Animation.hpp>
+#include <graphics/components/Healthbar.hpp>
 
 using namespace entityx;
 
@@ -21,12 +22,18 @@ namespace px
 		void update(Entity & minion, double dt)
 		{	
 			minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (float)dt;
+			minion.component<Healthbar>()->background.component<Transform>()->position = minion.component<Transform>()->position + minion.component<Healthbar>()->backgroundOffset;
+			minion.component<Healthbar>()->bar.component<Transform>()->position = minion.component<Transform>()->position + minion.component<Healthbar>()->barOffset;
 
 			if (m_target == NULL)
 				resetVelocity();
 
 			if (m_health <= 0)
+			{
+				minion.component<Healthbar>()->background.destroy();
+				minion.component<Healthbar>()->bar.destroy();
 				minion.destroy();
+			}
 		}
 
 	public:
