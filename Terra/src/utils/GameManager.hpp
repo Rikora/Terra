@@ -12,7 +12,19 @@ namespace px
 		struct GameManager
 		{
 			uint playerGold = 1000;
-			uint playerMonkCost = 100;
+
+			// Sample values
+			uint convertResourceType(const std::string & type)
+			{
+				uint value;
+
+				if (type == "Monk")
+					value = 100;
+				else if (type == "SpearOrc")
+					value = 100;
+
+				return value;
+			}
 		};
 	}
 }

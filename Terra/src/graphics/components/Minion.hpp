@@ -9,8 +9,9 @@ namespace px
 	class MinionScript
 	{
 	public:
-		explicit MinionScript(const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : m_isAttacking(false), m_isFrontAttacking(false), 
-					 m_velocity(velocity), m_tmpVelocity(velocity), m_offset(offset), m_damage(damage), m_health(health), m_maxHealth(health) {};
+		explicit MinionScript(const std::string & type, const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : m_isAttacking(false),
+							  m_isFrontAttacking(false), m_velocity(velocity), m_tmpVelocity(velocity), m_offset(offset), m_damage(damage), 
+							  m_health(health), m_maxHealth(health), m_type(type) {};
 		~MinionScript() = default;
 
 	public:
@@ -25,6 +26,7 @@ namespace px
 		void setTarget(Entity & target) { m_target = target; }
 
 	public:
+		std::string getType() const { return m_type; }
 		float getVelocity() const { return m_velocity; }
 		bool isAttacking() const { return m_isAttacking; }
 		bool isFrontAttacking() const { return m_isFrontAttacking; }
@@ -38,6 +40,7 @@ namespace px
 		thor::StopWatch m_damageWatch;
 
 	private:
+		std::string m_type;
 		uint m_damage;
 		uint m_health;
 		uint m_maxHealth;
@@ -52,8 +55,8 @@ namespace px
 
 	struct Minion
 	{
-		explicit Minion(const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : 
-				minion(std::make_unique<MinionScript>(velocity, offset, damage, health)) {}
+		explicit Minion(const std::string & type, const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : 
+						minion(std::make_unique<MinionScript>(type, velocity, offset, damage, health)) {}
 
 		std::unique_ptr<MinionScript> minion;
 	};

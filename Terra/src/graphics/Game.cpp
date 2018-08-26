@@ -60,8 +60,8 @@ namespace px
 				m_drawDebugData = !m_drawDebugData;
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
-				m_scene->createMinion("Player", Textures::Monk);
-				m_scene->createMinion("Enemy", Textures::SpearOrc);
+				m_scene->createMinion("Player", "Monk", Textures::Monk);
+				m_scene->createMinion("Enemy", "SpearOrc", Textures::SpearOrc);
 			}
 		}
 	}

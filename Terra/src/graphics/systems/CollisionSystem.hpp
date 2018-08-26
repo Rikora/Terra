@@ -10,6 +10,7 @@
 #include <graphics/components/Render.hpp>
 #include <graphics/components/Healthbar.hpp>
 #include <graphics/components/TextAnimation.hpp>
+#include <utils/GameManager.hpp>
 
 using namespace entityx;
 
@@ -18,7 +19,7 @@ namespace px
 	class CollisionSystem : public System<CollisionSystem>
 	{
 	public:
-		explicit CollisionSystem(Scene & scene) : m_scene(scene) {}
+		explicit CollisionSystem(Scene & scene, utils::GameManager & gameManager) : m_scene(scene), m_gameManager(gameManager) {}
 
 		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
 		{
@@ -45,9 +46,9 @@ namespace px
 							}
 						};
 
-						if (m.component<Render>()->name == "Player")
+						if (minion->minion->getType() == "Monk")
 							dealDamage(0.65f);
-						else if (m.component<Render>()->name == "Enemy")
+						else if (minion->minion->getType() == "SpearOrc")
 							dealDamage(0.65f);
 					}
 					else
@@ -60,7 +61,7 @@ namespace px
 					}
 				}
 
-				updateMinions(m, dt);
+				updateMinion(m, dt);
 			}
 
 			for (auto left_entity : es.entities_with_components(left_minion))
@@ -126,11 +127,13 @@ namespace px
 		}
 
 		private:
-			void updateMinions(Entity & entity, double dt)
+			void updateMinion(Entity & entity, double dt)
 			{
 				auto minion = entity.component<Minion>();
 				auto trans = entity.component<Transform>();
 				auto healthbar = entity.component<Healthbar>();
+				auto render = entity.component<Render>();
+				auto box = entity.component<BoundingBox>();
 
 				trans->position.x += minion->minion->getVelocity() * (float)dt;
 				healthbar->background.component<Transform>()->position = trans->position + healthbar->backgroundOffset;
@@ -139,19 +142,27 @@ namespace px
 				if (minion->minion->getTarget() == NULL)
 					minion->minion->resetVelocity();
 
-				// Destroy minion and spawn text
+				// Destroy minion and spawn resource value text only for enemies
 				if (minion->minion->getHealth() <= 0)
 				{
-					sf::Vector2f pos = trans->position;
+					sf::Vector2f pos = sf::Vector2f(box->boundingBox.left, box->boundingBox.top);
+					std::string name = render->name;
+					uint value = m_gameManager.convertResourceType(minion->minion->getType());
 					healthbar->background.destroy();
 					healthbar->bar.destroy();
 					entity.destroy();
-					auto e = m_scene.createText("100", Fonts::Game, 16, pos, sf::Color::Yellow);
-					e.assign<TextAnimation>(60.f, 3);
+
+					if (name == "Enemy")
+					{
+						m_gameManager.playerGold += value;
+						auto e = m_scene.createText("+" + std::to_string(value), Fonts::Game, 16, pos, sf::Color::Yellow);
+						e.assign<TextAnimation>(45.f, 3);
+					}
 				}
 			}
 
 		private:
 			Scene & m_scene;
+			utils::GameManager & m_gameManager;
 	};
 }
