@@ -8,6 +8,8 @@
 namespace px
 {
 	const double timestep = 1.0 / 60.0;
+	bool startAnimation = false;
+	float textSpeed = 60.f;
 
 	Game::Game() : m_window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Terra", sf::Style::Close,
 							sf::ContextSettings(0U, 0U, 8U)), m_drawDebugData(false)
@@ -44,6 +46,7 @@ namespace px
 		m_scene->createEntity("Background", Textures::Background, sf::Vector2f(0.f, 0.f));
 		m_goldText = m_scene->createText("Gold: " + std::to_string(m_gameManager.playerGold), Fonts::Game, 22, sf::Vector2f(30.f, 35.f), sf::Color::Yellow);
 		m_goldText.component<Text>()->text->setOutlineThickness(2.f);
+		m_animatedText = m_scene->createText("100", Fonts::Game, 16, sf::Vector2f(200.f, 600.f), sf::Color::Yellow);
 
 		// Test code
 		//m_scene->createMinion("Player", Textures::Monk);
@@ -63,12 +66,21 @@ namespace px
 				m_scene->createMinion("Player", Textures::Monk);
 				m_scene->createMinion("Enemy", Textures::SpearOrc);
 			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::K)
+				startAnimation = !startAnimation;
 		}
 	}
 
 	void Game::update(double dt)
 	{
 		m_goldText.component<Text>()->text->setString("Gold: " + std::to_string(m_gameManager.playerGold));
+
+		if (startAnimation)
+		{
+			m_animatedText.component<Text>()->text->setFillColor(m_animatedText.component<Text>()->text->getFillColor() - sf::Color(0, 0, 0, 1));
+			m_animatedText.component<Transform>()->position.y -= textSpeed * (float)dt;
+		}
+
 		m_scene->updateTransformSystems(dt);
 	}
 

@@ -21,7 +21,7 @@ namespace px
 		void resetVelocity() { m_velocity = m_tmpVelocity; }
 		void update(Entity & minion, double dt)
 		{	
-			minion.component<Transform>()->position += sf::Vector2f(m_velocity, 0.f) * (float)dt;
+			minion.component<Transform>()->position.x += m_velocity * (float)dt;
 			minion.component<Healthbar>()->background.component<Transform>()->position = minion.component<Transform>()->position + minion.component<Healthbar>()->backgroundOffset;
 			minion.component<Healthbar>()->bar.component<Transform>()->position = minion.component<Transform>()->position + minion.component<Healthbar>()->barOffset;
 

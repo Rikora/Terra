@@ -42,6 +42,7 @@ namespace px
 
 	void Scene::createMinion(const std::string & name, Textures::ID texID)
 	{
+		// Use a json file to store minion properties instead?
 		if (name == "Player")
 		{
 			auto entity = createEntity(name, texID, PLAYER_BASE_POSITION, sf::Vector2f(1.f, 1.f), 1);
@@ -70,7 +71,7 @@ namespace px
 			auto entity = createEntity(name, texID, ENEMY_BASE_POSITION, sf::Vector2f(1.f, 1.f), 1);
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(17.f, 11.f));
-			entity.assign<Minion>(-60.f, sf::Vector2f(0.f, 40.f), 10, 100);
+			entity.assign<Minion>(-60.f, sf::Vector2f(0.f, 40.f), 20, 100);
 			entity.assign<Healthbar>(createEntity("Background", Textures::HealthbarBackground, ENEMY_BASE_POSITION + sf::Vector2f(16.f, -3.f), 
 									 sf::Vector2f(0.15f, 0.25f), 1),
 									 createEntity("Healthbar", Textures::Healthbar, ENEMY_BASE_POSITION + sf::Vector2f(17.f, -1.f), 
