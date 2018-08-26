@@ -1,10 +1,6 @@
 #pragma once
 #include <entityx/Entity.h>
 #include <Thor/Time/StopWatch.hpp>
-#include <graphics/components/Render.hpp>
-#include <graphics/components/Transform.hpp>
-#include <graphics/components/Animation.hpp>
-#include <graphics/components/Healthbar.hpp>
 
 using namespace entityx;
 
@@ -13,28 +9,12 @@ namespace px
 	class MinionScript
 	{
 	public:
-		MinionScript(const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : m_isAttacking(false), m_isFrontAttacking(false), 
+		explicit MinionScript(const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : m_isAttacking(false), m_isFrontAttacking(false), 
 					 m_velocity(velocity), m_tmpVelocity(velocity), m_offset(offset), m_damage(damage), m_health(health), m_maxHealth(health) {};
 		~MinionScript() = default;
 
 	public:
 		void resetVelocity() { m_velocity = m_tmpVelocity; }
-		void update(Entity & minion, double dt)
-		{	
-			minion.component<Transform>()->position.x += m_velocity * (float)dt;
-			minion.component<Healthbar>()->background.component<Transform>()->position = minion.component<Transform>()->position + minion.component<Healthbar>()->backgroundOffset;
-			minion.component<Healthbar>()->bar.component<Transform>()->position = minion.component<Transform>()->position + minion.component<Healthbar>()->barOffset;
-
-			if (m_target == NULL)
-				resetVelocity();
-
-			if (m_health <= 0)
-			{
-				minion.component<Healthbar>()->background.destroy();
-				minion.component<Healthbar>()->bar.destroy();
-				minion.destroy();
-			}
-		}
 
 	public:
 		void setVelocity(const float & velocity) { m_velocity = velocity;  }
@@ -45,6 +25,7 @@ namespace px
 		void setTarget(Entity & target) { m_target = target; }
 
 	public:
+		float getVelocity() const { return m_velocity; }
 		bool isAttacking() const { return m_isAttacking; }
 		bool isFrontAttacking() const { return m_isFrontAttacking; }
 		sf::Vector2f getFrontCollider() const { return m_frontCollider; }
@@ -71,7 +52,7 @@ namespace px
 
 	struct Minion
 	{
-		Minion(const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : 
+		explicit Minion(const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : 
 				minion(std::make_unique<MinionScript>(velocity, offset, damage, health)) {}
 
 		std::unique_ptr<MinionScript> minion;

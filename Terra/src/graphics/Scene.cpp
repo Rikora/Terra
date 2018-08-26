@@ -126,7 +126,7 @@ namespace px
 		m_systems.add<RenderSystem>(target, m_layers, drawDebugData);
 		m_systems.add<TransformSystem>();
 		m_systems.add<AnimationSystem>();
-		m_systems.add<CollisionSystem>();
+		m_systems.add<CollisionSystem>(*this);
 		m_systems.configure();
 	}
 }

@@ -9,6 +9,7 @@
 #include <graphics/components/BoundingBox.hpp>
 #include <graphics/components/Minion.hpp>
 #include <graphics/components/Text.hpp>
+#include <graphics/components/TextAnimation.hpp>
 
 using namespace entityx;
 
@@ -46,7 +47,12 @@ namespace px
 			}
 
 			for (auto entity : es.entities_with_components(text, trans))
+			{
 				text->text->setPosition(trans->position);
+
+				if (entity.has_component<TextAnimation>())
+					entity.component<TextAnimation>()->text->update(entity, dt);
+			}
 		}
 	};
 }

@@ -151,6 +151,7 @@
     <ClInclude Include="src\graphics\components\Minion.hpp" />
     <ClInclude Include="src\graphics\components\Render.hpp" />
     <ClInclude Include="src\graphics\components\Text.hpp" />
+    <ClInclude Include="src\graphics\components\TextAnimation.hpp" />
     <ClInclude Include="src\graphics\components\Transform.hpp" />
     <ClInclude Include="src\graphics\Game.hpp" />
     <ClInclude Include="src\graphics\Scene.hpp" />

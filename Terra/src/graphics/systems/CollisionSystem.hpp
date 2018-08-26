@@ -8,6 +8,8 @@
 #include <graphics/components/Minion.hpp>
 #include <graphics/components/Transform.hpp>
 #include <graphics/components/Render.hpp>
+#include <graphics/components/Healthbar.hpp>
+#include <graphics/components/TextAnimation.hpp>
 
 using namespace entityx;
 
@@ -16,6 +18,8 @@ namespace px
 	class CollisionSystem : public System<CollisionSystem>
 	{
 	public:
+		explicit CollisionSystem(Scene & scene) : m_scene(scene) {}
+
 		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
 		{
 			ComponentHandle<Minion> minion, left_minion, right_minion;
@@ -56,7 +60,7 @@ namespace px
 					}
 				}
 
-				minion->minion->update(m, dt);
+				updateMinions(m, dt);
 			}
 
 			for (auto left_entity : es.entities_with_components(left_minion))
@@ -120,5 +124,34 @@ namespace px
 				}
 			}
 		}
+
+		private:
+			void updateMinions(Entity & entity, double dt)
+			{
+				auto minion = entity.component<Minion>();
+				auto trans = entity.component<Transform>();
+				auto healthbar = entity.component<Healthbar>();
+
+				trans->position.x += minion->minion->getVelocity() * (float)dt;
+				healthbar->background.component<Transform>()->position = trans->position + healthbar->backgroundOffset;
+				healthbar->bar.component<Transform>()->position = trans->position + healthbar->barOffset;
+
+				if (minion->minion->getTarget() == NULL)
+					minion->minion->resetVelocity();
+
+				// Destroy minion and spawn text
+				if (minion->minion->getHealth() <= 0)
+				{
+					sf::Vector2f pos = trans->position;
+					healthbar->background.destroy();
+					healthbar->bar.destroy();
+					entity.destroy();
+					auto e = m_scene.createText("100", Fonts::Game, 16, pos, sf::Color::Yellow);
+					e.assign<TextAnimation>(60.f, 3);
+				}
+			}
+
+		private:
+			Scene & m_scene;
 	};
 }

@@ -35,7 +35,6 @@ namespace px
 		ImageHolder m_images;
 		FontHolder m_fonts;
 		Entity m_goldText;
-		Entity m_animatedText;
 		utils::GameManager m_gameManager;
 		bool m_drawDebugData;
 
