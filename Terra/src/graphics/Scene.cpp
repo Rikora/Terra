@@ -49,11 +49,7 @@ namespace px
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(15.f, 11.f));
 			entity.assign<Minion>(type, 60.f, sf::Vector2f(56.f, 40.f), 50, 100);
-			entity.assign<Healthbar>(createEntity("Background", Textures::HealthbarBackground, PLAYER_BASE_POSITION + sf::Vector2f(16.f, -3.f), 
-									 sf::Vector2f(0.15f, 0.25f), 1),
-									 createEntity("Healthbar", Textures::Healthbar, PLAYER_BASE_POSITION + sf::Vector2f(17.f, -1.f), 
-								     sf::Vector2f(0.14f, 0.15f), 2),
-									 sf::Vector2f(16.f, -3.f), sf::Vector2f(17.f, -1.f), 0.14f);
+			addHealthbars(entity, PLAYER_BASE_POSITION);
 
 			auto anim = entity.component<Animation>();
 
@@ -72,11 +68,7 @@ namespace px
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(17.f, 11.f));
 			entity.assign<Minion>(type, -60.f, sf::Vector2f(0.f, 40.f), 20, 100);
-			entity.assign<Healthbar>(createEntity("Background", Textures::HealthbarBackground, ENEMY_BASE_POSITION + sf::Vector2f(16.f, -3.f), 
-									 sf::Vector2f(0.15f, 0.25f), 1),
-									 createEntity("Healthbar", Textures::Healthbar, ENEMY_BASE_POSITION + sf::Vector2f(17.f, -1.f), 
-								     sf::Vector2f(0.14f, 0.15f), 2),
-									 sf::Vector2f(16.f, -3.f), sf::Vector2f(17.f, -1.f), 0.14f);
+			addHealthbars(entity, ENEMY_BASE_POSITION);
 			auto anim = entity.component<Animation>();
 
 			if (texID == Textures::SpearOrc)
@@ -128,5 +120,14 @@ namespace px
 		m_systems.add<AnimationSystem>();
 		m_systems.add<CollisionSystem>(*this, m_gameManager);
 		m_systems.configure();
+	}
+
+	void Scene::addHealthbars(Entity & entity, const sf::Vector2f & position)
+	{
+		entity.assign<Healthbar>(createEntity("Background", Textures::HealthbarBackground, position + sf::Vector2f(16.f, -3.f),
+								 sf::Vector2f(0.15f, 0.25f), 1),
+								 createEntity("Healthbar", Textures::Healthbar, position + sf::Vector2f(17.f, -1.f),
+								 sf::Vector2f(0.14f, 0.15f), 2),
+								 sf::Vector2f(16.f, -3.f), sf::Vector2f(17.f, -1.f), 0.14f);
 	}
 }

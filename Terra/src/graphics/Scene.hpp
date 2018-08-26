@@ -41,6 +41,7 @@ namespace px
 
 	private:
 		void initSystems(sf::RenderTarget & target, bool & drawDebugData);
+		void addHealthbars(Entity & entity, const sf::Vector2f & position);
 
 	private:
 		EntityManager m_entities;
