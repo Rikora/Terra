@@ -19,7 +19,7 @@ namespace px
 		~AnimatedText() = default;
 
 	public:
-		void update(Entity & entity, double dt)
+		inline void update(Entity & entity, double dt)
 		{
 			auto text = entity.component<Text>();
 			text->text->setFillColor(text->text->getFillColor() - sf::Color(0, 0, 0, m_alphaStep));

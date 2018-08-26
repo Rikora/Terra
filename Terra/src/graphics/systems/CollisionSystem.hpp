@@ -21,7 +21,7 @@ namespace px
 	public:
 		explicit CollisionSystem(Scene & scene, utils::GameManager & gameManager) : m_scene(scene), m_gameManager(gameManager) {}
 
-		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
+		inline virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
 		{
 			ComponentHandle<Minion> minion, left_minion, right_minion;
 
@@ -127,7 +127,7 @@ namespace px
 		}
 
 		private:
-			void updateMinion(Entity & entity, double dt)
+			inline void updateMinion(Entity & entity, double dt)
 			{
 				auto minion = entity.component<Minion>();
 				auto trans = entity.component<Transform>();

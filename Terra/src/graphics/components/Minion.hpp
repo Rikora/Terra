@@ -15,26 +15,26 @@ namespace px
 		~MinionScript() = default;
 
 	public:
-		void resetVelocity() { m_velocity = m_tmpVelocity; }
+		inline void resetVelocity() { m_velocity = m_tmpVelocity; }
 
 	public:
-		void setVelocity(const float & velocity) { m_velocity = velocity;  }
-		void setAttacking(const bool & attacking) { m_isAttacking = attacking; }
-		void setFrontAttacking(const bool & frontAttacking) { m_isFrontAttacking = frontAttacking; }
-		void setFrontCollider(const sf::Vector2f & pos) { m_frontCollider = pos + m_offset; }
-		void setHealth(const uint & health) { m_health = health; }
-		void setTarget(Entity & target) { m_target = target; }
+		inline void setVelocity(const float & velocity) { m_velocity = velocity;  }
+		inline void setAttacking(const bool & attacking) { m_isAttacking = attacking; }
+		inline void setFrontAttacking(const bool & frontAttacking) { m_isFrontAttacking = frontAttacking; }
+		inline void setFrontCollider(const sf::Vector2f & pos) { m_frontCollider = pos + m_offset; }
+		inline void setHealth(const uint & health) { m_health = health; }
+		inline void setTarget(Entity & target) { m_target = target; }
 
 	public:
-		std::string getType() const { return m_type; }
-		float getVelocity() const { return m_velocity; }
-		bool isAttacking() const { return m_isAttacking; }
-		bool isFrontAttacking() const { return m_isFrontAttacking; }
-		sf::Vector2f getFrontCollider() const { return m_frontCollider; }
-		uint getDamage() const { return m_damage; }
-		uint getHealth() const { return m_health; }
-		uint getMaxHealth() const { return m_maxHealth; }
-		Entity getTarget() { return m_target; }
+		inline std::string getType() const { return m_type; }
+		inline float getVelocity() const { return m_velocity; }
+		inline bool isAttacking() const { return m_isAttacking; }
+		inline bool isFrontAttacking() const { return m_isFrontAttacking; }
+		inline sf::Vector2f getFrontCollider() const { return m_frontCollider; }
+		inline uint getDamage() const { return m_damage; }
+		inline uint getHealth() const { return m_health; }
+		inline uint getMaxHealth() const { return m_maxHealth; }
+		inline Entity getTarget() { return m_target; }
 
 	public:
 		thor::StopWatch m_damageWatch;
@@ -55,7 +55,7 @@ namespace px
 
 	struct Minion
 	{
-		explicit Minion(const std::string & type, const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) : 
+		explicit Minion(const std::string & type, const float & velocity, const sf::Vector2f & offset, const uint & damage, const uint & health) :
 						minion(std::make_unique<MinionScript>(type, velocity, offset, damage, health)) {}
 
 		std::unique_ptr<MinionScript> minion;

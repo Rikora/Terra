@@ -14,7 +14,7 @@ namespace px
 			uint playerGold = 1000;
 
 			// Sample values
-			uint convertResourceType(const std::string & type)
+			inline uint convertResourceType(const std::string & type)
 			{
 				uint value;
 

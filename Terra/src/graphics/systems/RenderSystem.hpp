@@ -30,7 +30,7 @@ namespace px
 						      m_drawDebugData(drawDebugData) {}
 
 	public:
-		virtual void update(EntityManager &es, EventManager &events, TimeDelta dt) override
+		inline virtual void update(EntityManager &es, EventManager &events, TimeDelta dt) override
 		{
 			ComponentHandle<Render> render;
 			ComponentHandle<Text> text;
@@ -66,7 +66,7 @@ namespace px
 		}
 
 	private:
-		sf::RectangleShape drawRect(const sf::FloatRect & rect)
+		inline sf::RectangleShape drawRect(const sf::FloatRect & rect)
 		{
 			sf::RectangleShape shape;
 			shape.setPosition(sf::Vector2f(rect.left, rect.top));
@@ -77,7 +77,7 @@ namespace px
 			return shape;
 		}
 
-		sf::CircleShape drawCircle(const sf::Vector2f & position)
+		inline sf::CircleShape drawCircle(const sf::Vector2f & position)
 		{
 			sf::CircleShape shape;
 			shape.setPosition(position);

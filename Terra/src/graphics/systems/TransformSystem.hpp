@@ -18,7 +18,7 @@ namespace px
 	class TransformSystem : public System<TransformSystem>
 	{
 	public:
-		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
+		inline virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
 		{
 			ComponentHandle<Render> render;
 			ComponentHandle<Text> text;

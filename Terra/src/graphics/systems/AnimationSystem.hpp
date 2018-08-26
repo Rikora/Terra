@@ -14,7 +14,7 @@ namespace px
 	class AnimationSystem : public System<AnimationSystem>
 	{
 	public:
-		virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
+		inline virtual void update(EntityManager & es, EventManager & events, TimeDelta dt) override
 		{
 			ComponentHandle<Render> render;
 			ComponentHandle<Animation> anim;
