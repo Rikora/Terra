@@ -45,8 +45,6 @@ namespace px
 
 						if (m_drawDebugData)
 						{
-							//m_target.draw(drawCircle(entity.component<Transform>()->position));
-
 							if (entity.has_component<BoundingBox>())
 							{
 								auto box = entity.component<BoundingBox>();

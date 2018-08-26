@@ -88,7 +88,7 @@ namespace px
 							}
 						};
 
-						auto attackMinion = [left_minion, right_minion](Entity & left_entity, Entity & right_entity)
+						auto attackMinion = [left_minion](Entity & left_entity, Entity & right_entity)
 						{
 							if (!left_minion->minion->isAttacking())
 							{
@@ -155,8 +155,8 @@ namespace px
 					if (name == "Enemy")
 					{
 						m_gameManager.playerGold += value;
-						auto e = m_scene.createText("+" + std::to_string(value), Fonts::Game, 16, pos, sf::Color::Yellow);
-						e.assign<TextAnimation>(45.f, 3);
+						auto text = m_scene.createText("+" + std::to_string(value), Fonts::Game, 16, pos, sf::Color::Yellow);
+						text.assign<TextAnimation>(45.f, 3);
 					}
 				}
 			}
