@@ -15,7 +15,7 @@ namespace px
 	class AnimatedText
 	{
 	public:
-		explicit AnimatedText(const float & velocity, const sf::Uint8 alphaStep) : m_velocity(velocity), m_alphaStep(alphaStep) {}
+		explicit AnimatedText(const float & velocity, const sf::Uint8 & alphaStep) : m_velocity(velocity), m_alphaStep(alphaStep) {}
 		~AnimatedText() = default;
 
 	public:
@@ -36,7 +36,7 @@ namespace px
 
 	struct TextAnimation
 	{
-		explicit TextAnimation(const float & velocity, const sf::Uint8 alphaStep) : text(std::make_unique<AnimatedText>(velocity, alphaStep)) {}
+		explicit TextAnimation(const float & velocity, const sf::Uint8 & alphaStep) : text(std::make_unique<AnimatedText>(velocity, alphaStep)) {}
 
 		std::unique_ptr<AnimatedText> text;
 	};

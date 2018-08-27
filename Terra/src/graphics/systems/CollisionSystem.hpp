@@ -135,6 +135,7 @@ namespace px
 				auto render = entity.component<Render>();
 				auto box = entity.component<BoundingBox>();
 
+				// Move the minion and healthbars
 				trans->position.x += minion->minion->getVelocity() * (float)dt;
 				healthbar->background.component<Transform>()->position = trans->position + healthbar->backgroundOffset;
 				healthbar->bar.component<Transform>()->position = trans->position + healthbar->barOffset;
