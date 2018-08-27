@@ -8,9 +8,6 @@
     <ClCompile Include="src\graphics\Scene.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\utils\AnimationHelper.cpp">
-      <Filter>Source\Utility</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Game.hpp">
@@ -51,9 +48,6 @@
     </ClInclude>
     <ClInclude Include="src\graphics\systems\CollisionSystem.hpp">
       <Filter>Source\Graphics\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utils\AnimationHelper.hpp">
-      <Filter>Source\Utility</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\GameManager.hpp">
       <Filter>Source\Utility</Filter>

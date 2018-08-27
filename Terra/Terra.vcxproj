@@ -142,7 +142,6 @@
     <ClCompile Include="src\graphics\Game.cpp" />
     <ClCompile Include="src\graphics\Scene.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\utils\AnimationHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\components\Animation.hpp" />
@@ -159,7 +158,6 @@
     <ClInclude Include="src\graphics\systems\CollisionSystem.hpp" />
     <ClInclude Include="src\graphics\systems\RenderSystem.hpp" />
     <ClInclude Include="src\graphics\systems\TransformSystem.hpp" />
-    <ClInclude Include="src\utils\AnimationHelper.hpp" />
     <ClInclude Include="src\utils\GameManager.hpp" />
     <ClInclude Include="src\utils\Helper.hpp" />
     <ClInclude Include="src\utils\ResourceHolder.hpp" />

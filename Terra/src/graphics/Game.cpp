@@ -9,7 +9,7 @@ namespace px
 {
 	const double timestep = 1.0 / 60.0;
 
-	Game::Game() : m_window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Terra", sf::Style::Close,
+	Game::Game() : m_window(sf::VideoMode(screen_width, screen_height), "Terra", sf::Style::Close,
 							sf::ContextSettings(0U, 0U, 8U)), m_drawDebugData(false)
 	{
 		m_window.setVerticalSyncEnabled(true);
