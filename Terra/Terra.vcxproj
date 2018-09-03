@@ -71,19 +71,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/third-party/sfml/include;$(ProjectDir)/third-party/entityx/include;$(ProjectDir)/third-party/thor/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/third-party/sfml/include;$(ProjectDir)/third-party/entityx/include;$(ProjectDir)/third-party/thor/include;$(ProjectDir)/third-party/json/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)/third-party/sfml/lib;$(ProjectDir)/third-party/entityx/lib;$(ProjectDir)/third-party/thor/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/third-party/sfml/include;$(ProjectDir)/third-party/entityx/include;$(ProjectDir)/third-party/thor/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/third-party/sfml/include;$(ProjectDir)/third-party/entityx/include;$(ProjectDir)/third-party/thor/include;$(ProjectDir)/third-party/json/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)/third-party/sfml/lib;$(ProjectDir)/third-party/entityx/lib;$(ProjectDir)/third-party/thor/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/third-party/sfml/include;$(ProjectDir)/third-party/entityx/include;$(ProjectDir)/third-party/thor/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/third-party/sfml/include;$(ProjectDir)/third-party/entityx/include;$(ProjectDir)/third-party/thor/include;$(ProjectDir)/third-party/json/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)/third-party/sfml/lib;$(ProjectDir)/third-party/entityx/lib;$(ProjectDir)/third-party/thor/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/third-party/sfml/include;$(ProjectDir)/third-party/entityx/include;$(ProjectDir)/third-party/thor/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/third-party/sfml/include;$(ProjectDir)/third-party/entityx/include;$(ProjectDir)/third-party/thor/include;$(ProjectDir)/third-party/json/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)/third-party/sfml/lib;$(ProjectDir)/third-party/entityx/lib;$(ProjectDir)/third-party/thor/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -142,12 +142,14 @@
     <ClCompile Include="src\graphics\Game.cpp" />
     <ClCompile Include="src\graphics\Scene.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\utils\ParticleLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\components\Animation.hpp" />
     <ClInclude Include="src\graphics\components\BoundingBox.hpp" />
     <ClInclude Include="src\graphics\components\Healthbar.hpp" />
     <ClInclude Include="src\graphics\components\Minion.hpp" />
+    <ClInclude Include="src\graphics\components\Particle.hpp" />
     <ClInclude Include="src\graphics\components\Render.hpp" />
     <ClInclude Include="src\graphics\components\Text.hpp" />
     <ClInclude Include="src\graphics\components\TextAnimation.hpp" />
@@ -160,6 +162,7 @@
     <ClInclude Include="src\graphics\systems\TransformSystem.hpp" />
     <ClInclude Include="src\utils\GameManager.hpp" />
     <ClInclude Include="src\utils\Helper.hpp" />
+    <ClInclude Include="src\utils\ParticleLoader.hpp" />
     <ClInclude Include="src\utils\ResourceHolder.hpp" />
     <ClInclude Include="src\utils\ResourceIdentifiers.hpp" />
   </ItemGroup>

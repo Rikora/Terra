@@ -11,6 +11,7 @@
 #include <graphics/components/Minion.hpp>
 #include <graphics/components/Text.hpp>
 #include <graphics/components/Healthbar.hpp>
+#include <graphics/components/Particle.hpp>
 #include <utils/ResourceHolder.hpp>
 #include <utils/ResourceIdentifiers.hpp>
 
@@ -31,6 +32,7 @@ namespace px
 		Entity createEntity(const std::string & name, Textures::ID texID, const sf::Vector2f & position, 
 							const sf::Vector2f & scale = sf::Vector2f(1.f, 1.f), const uint & layer = 0);
 		Entity createText(const std::string & name, Fonts::ID fontID, const uint & fontSize, const sf::Vector2f & position, const sf::Color & color = sf::Color::White);
+		Entity createParticleSystem(const std::string & filePath, const sf::Vector2f & position);
 		void createMinion(const std::string & name, const std::string & type, Textures::ID texID);
 		void destroyEntities();
 		void updateRenderSystem(TimeDelta dt);

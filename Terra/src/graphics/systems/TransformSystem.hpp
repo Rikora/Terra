@@ -10,6 +10,7 @@
 #include <graphics/components/Minion.hpp>
 #include <graphics/components/Text.hpp>
 #include <graphics/components/TextAnimation.hpp>
+#include <graphics/components/Particle.hpp>
 
 using namespace entityx;
 
@@ -24,6 +25,7 @@ namespace px
 			ComponentHandle<Text> text;
 			ComponentHandle<Transform> trans;
 			ComponentHandle<Minion> minion;
+			ComponentHandle<Particle> particle;
 
 			for (auto entity : es.entities_with_components(render, trans))
 			{
@@ -45,6 +47,9 @@ namespace px
 					minion->minion->setFrontCollider(trans->position);
 				}
 			}
+
+			for (auto entity : es.entities_with_components(particle))
+				particle->particle->update(entity);
 
 			for (auto entity : es.entities_with_components(text, trans))
 			{

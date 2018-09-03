@@ -10,6 +10,7 @@
 #include <graphics/components/Render.hpp>
 #include <graphics/components/Healthbar.hpp>
 #include <graphics/components/TextAnimation.hpp>
+#include <graphics/components/Particle.hpp>
 #include <utils/GameManager.hpp>
 
 using namespace entityx;
@@ -32,16 +33,23 @@ namespace px
 				{
 					if (minion->minion->getTarget())
 					{
-						auto dealDamage = [minion](const float & attackFrame)
+						auto dealDamage = [minion, this](const float & attackFrame)
 						{
 							// Reduce health of target minion and display result as the health bar
 							if (minion->minion->m_damageWatch.isRunning() && minion->minion->m_damageWatch.getElapsedTime().asSeconds() >= attackFrame)
 							{
 								auto target = minion->minion->getTarget().component<Minion>();
 								auto healthbar = minion->minion->getTarget().component<Healthbar>();
+								auto box = minion->minion->getTarget().component<BoundingBox>();
 								target->minion->setHealth(target->minion->getHealth() - minion->minion->getDamage());
 								healthbar->bar.component<Transform>()->scale.x = ((float)target->minion->getHealth() / (float)target->minion->getMaxHealth()) * 
-																			     healthbar->healthScaleX;
+																			     healthbar->healthScaleX;	
+								if (target->minion->getHealth() != 0)
+								{
+									sf::Vector2f pos = sf::Vector2f(box->boundingBox.left + 17.f, box->boundingBox.top + 30.f);
+									m_scene.createParticleSystem("src/res/particles/bloodParticle.json", pos);
+								}
+							
 								minion->minion->m_damageWatch.restart();
 							}
 						};

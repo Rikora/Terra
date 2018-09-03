@@ -10,6 +10,7 @@
 #include <graphics/components/BoundingBox.hpp>
 #include <graphics/components/Text.hpp>
 #include <graphics/components/Minion.hpp>
+#include <graphics/components/Particle.hpp>
 #include <utils/Helper.hpp>
 
 using namespace entityx;
@@ -34,6 +35,7 @@ namespace px
 		{
 			ComponentHandle<Render> render;
 			ComponentHandle<Text> text;
+			ComponentHandle<Particle> particle;
 
 			for (auto layer : m_layers)
 			{
@@ -60,6 +62,9 @@ namespace px
 					}
 				}
 			}
+
+			for (auto entity : es.entities_with_components(particle))
+				m_target.draw(*particle->particle.get());
 
 			for (auto entity : es.entities_with_components(text))
 				m_target.draw(*text->text.get());

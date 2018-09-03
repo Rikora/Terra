@@ -40,6 +40,14 @@ namespace px
 		return entity;
 	}
 
+	Entity Scene::createParticleSystem(const std::string & filePath, const sf::Vector2f & position)
+	{
+		auto entity = m_entities.create();
+		auto system = std::make_unique<utils::ParticleLoader>(filePath, position);
+		entity.assign<Particle>(std::move(system));
+		return entity;
+	}
+
 	void Scene::createMinion(const std::string & name, const std::string & type, Textures::ID texID)
 	{
 		// Use a json file to store minion properties instead?
@@ -48,7 +56,7 @@ namespace px
 			auto entity = createEntity(name, texID, PLAYER_BASE_POSITION, sf::Vector2f(1.f, 1.f), 1);
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(15.f, 11.f));
-			entity.assign<Minion>(type, 60.f, sf::Vector2f(56.f, 40.f), 50, 100);
+			entity.assign<Minion>(type, 60.f, sf::Vector2f(56.f, 40.f), 10, 100);
 			addHealthbars(entity, PLAYER_BASE_POSITION);
 
 			auto anim = entity.component<Animation>();
@@ -67,7 +75,7 @@ namespace px
 			auto entity = createEntity(name, texID, ENEMY_BASE_POSITION, sf::Vector2f(1.f, 1.f), 1);
 			entity.assign<Animation>();
 			entity.assign<BoundingBox>(sf::Vector2f(30.f, 52.f), sf::Vector2f(17.f, 11.f));
-			entity.assign<Minion>(type, -60.f, sf::Vector2f(0.f, 40.f), 20, 100);
+			entity.assign<Minion>(type, -60.f, sf::Vector2f(0.f, 40.f), 10, 100);
 			addHealthbars(entity, ENEMY_BASE_POSITION);
 			auto anim = entity.component<Animation>();
 

@@ -8,6 +8,9 @@
     <ClCompile Include="src\graphics\Scene.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\ParticleLoader.cpp">
+      <Filter>Source\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Game.hpp">
@@ -62,6 +65,12 @@
       <Filter>Source\Graphics\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\components\TextAnimation.hpp">
+      <Filter>Source\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\ParticleLoader.hpp">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\components\Particle.hpp">
       <Filter>Source\Graphics\Components</Filter>
     </ClInclude>
   </ItemGroup>
